@@ -1,0 +1,91 @@
+newmtl m0
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd0990.png
+
+newmtl m1
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd0991.png
+
+newmtl m2
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd0992.png
+
+newmtl m3
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd0993.png
+
+newmtl m4
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd0994.png
+
+newmtl m5
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd0995.png
+
+newmtl m6
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd0996.png
+
+newmtl m7
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd0568.png
+
+newmtl m8
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd00EA.png
+
+newmtl m9
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd02FA.png
+
+newmtl m10EnvMappingClampSClampTTexScaleS0.052735TexScaleT0.052735
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd028F.png
+
+newmtl m11
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd0997.png
+
+newmtl m12
+Ka 0 0 0
+illum 0
+Ns 64
+d 1.000000
+map_Kd ImgEd029C.png
+
