@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Simple 3D Game</title>
+  <link rel="stylesheet" href="styles.css"/> <!-- Link to your external CSS -->
+</head>
+<body>
+  <div id="menu-container" class="menu active">
+    <h1>My Simple 3D Game</h1>
+    <button id="play-button">Play</button>
+  </div>
+
+  <div id="new-game-container">
+    <canvas id="threejs-scene"></canvas>
+    <div id="controls">
+      <div id="vertical-controls">
+        <button id="move-forward" disabled>↑</button>
+        <button id="move-backward" disabled>↓</button>
+      </div>
+      <div id="horizontal-controls">
+        <button id="turn-left" disabled>←</button>
+        <button id="turn-right" disabled>→</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+  <script src="game.js"></script> <!-- Link to your external JS file -->
+</body>
+</html>
