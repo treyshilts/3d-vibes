@@ -1,3 +1,16 @@
+let mixer = null;
+let walkAction = null;
+let redSphere = null;
+
+let isWalking = false; // Tracks whether Stevey is currently walking  
+
+let score = 0; // Default score
+
+const updateScore = (newScore) => {
+    score = newScore;
+    document.getElementById('score').textContent = score;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('threejs-scene');
     const scene = new THREE.Scene();
