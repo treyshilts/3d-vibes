@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  overflow: hidden;
+}
+
+#menu-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 330px;
+  height: 330px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  border: 5px solid black;
+}
+
+#menu-container.hidden {
+  display: none;
+}
+
+#menu-container h1 {
+  margin-bottom: 20px;
+}
+
+#play-button {
+  padding: 15px 30px;
+  font-size: 18px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#new-game-container {
+  width: 330px;
+  height: 330px;
+  background: white;
+  border: 5px solid black;
+  position: relative;
+}
+
+#threejs-scene {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#controls {
+  position: absolute;
+  bottom: -80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  visibility: hidden; /* Hidden by default */
+}
+
+#controls.visible {
+  visibility: visible; /* Shown after pressing play */
+}
+
+#controls button {
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 18px;
+  user-select: none;
+}
+
+#controls button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
