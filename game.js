@@ -65,7 +65,7 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
     const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.png');
     grassTexture.wrapS = THREE.RepeatWrapping;
     grassTexture.wrapT = THREE.RepeatWrapping;
-    grassTexture.repeat.set(20, 20);
+    grassTexture.repeat.set(4, 4);
 
     const groundMaterial = new THREE.MeshLambertMaterial({ map: grassTexture });
     const ground = new THREE.Mesh(groundGeometry, groundMaterial);
