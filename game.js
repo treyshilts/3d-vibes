@@ -62,7 +62,7 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
     // Ground
     const groundGeometry = new THREE.PlaneGeometry(40, 40);
     const textureLoader = new THREE.TextureLoader();
-    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.png');
+    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
     grassTexture.wrapS = THREE.RepeatWrapping;
     grassTexture.wrapT = THREE.RepeatWrapping;
     grassTexture.repeat.set(4, 4);
@@ -148,8 +148,8 @@ const createTexturedCube = (x, y, z) => {
   const materials = [
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') }), // Front
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') }), // Back
-    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.png') }),      // Top
-    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.png') }),      // Bottom
+    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg') }),      // Top
+    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg') }),      // Bottom
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') }), // Left
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') })  // Right
   ];
@@ -204,7 +204,7 @@ const createDiagonalRamp = (x, y, z) => {
 
   // Load textures
   const sideTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp');
-  const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.png');
+  const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
 
   // Create materials
   const materials = [
