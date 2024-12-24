@@ -59,7 +59,7 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
 // scene.add(ambientLight);
 
     // Ground
-     const groundGeometry = new THREE.PlaneGeometry(40, 40);
+     const groundGeometry = new THREE.PlaneGeometry(0, 0);
      const textureLoader = new THREE.TextureLoader();
      const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
      grassTexture.wrapS = THREE.RepeatWrapping;
@@ -100,7 +100,7 @@ const loadMap = () => {
 
             // Position and scale the map
             map.position.set(0, 0, 0); // Adjust based on your scene
-            map.scale.set(4, 4, 4); // Adjust scaling if necessary
+            map.scale.set(7, 7, 7); // Adjust scaling if necessary
 
             // Add the map to the scene
             scene.add(map);
@@ -131,8 +131,6 @@ loadMap();
 
 // Wall positions
 const wallPositions = [];
-
-
 
     wallPositions.forEach(({ x, y, z, size }) => createWall(x, y, z, size));
 const createTexturedCube = (x, y, z) => {
