@@ -59,37 +59,37 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
 // scene.add(ambientLight);
 
     // Ground
-    // const groundGeometry = new THREE.PlaneGeometry(40, 40);
-    // const textureLoader = new THREE.TextureLoader();
-    // const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
-    // grassTexture.wrapS = THREE.RepeatWrapping;
-    // grassTexture.wrapT = THREE.RepeatWrapping;
-    // grassTexture.repeat.set(4, 4);
+     const groundGeometry = new THREE.PlaneGeometry(40, 40);
+     const textureLoader = new THREE.TextureLoader();
+     const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
+     grassTexture.wrapS = THREE.RepeatWrapping;
+     grassTexture.wrapT = THREE.RepeatWrapping;
+     grassTexture.repeat.set(4, 4);
 
-    // const groundMaterial = new THREE.MeshLambertMaterial({ map: grassTexture });
-    // const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-    // ground.rotation.x = -Math.PI / 2;
-    // scene.add(ground);
+     const groundMaterial = new THREE.MeshLambertMaterial({ map: grassTexture });
+     const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+     ground.rotation.x = -Math.PI / 2;
+     scene.add(ground);
 
-// Tree positions
-// Tree Positions
-// const treePositions = [{ x: -2, z: -4 }, { x: 3, z: 4 }];
-// const biggerTreePositions = [{ x: 5, z: 6 }, { x: -4, z: -7 }];
-// const smallerTreePositions = [
-  // { x: 4, z: 3 },
-  // { x: -6, z: 7 },
-  // { x: 2, z: -5 },
-  // { x: -8, z: 2 },
-  // { x: 6, z: -3 },
-  // { x: -3, z: -6 },
-// ];
-// const largestTreePositions = [
-  // { x: -10, z: 8 },
-  // { x: 7, z: -9 },
-  // { x: 0, z: 10 },
-// ];
+ // Tree positions
+ // Tree Positions
+ const treePositions = [{ x: -2, z: -4 }, { x: 3, z: 4 }];
+ const biggerTreePositions = [{ x: 5, z: 6 }, { x: -4, z: -7 }];
+ const smallerTreePositions = [
+   { x: 4, z: 3 },
+   { x: -6, z: 7 },
+   { x: 2, z: -5 },
+   { x: -8, z: 2 },
+   { x: 6, z: -3 },
+   { x: -3, z: -6 },
+ ];
+ const largestTreePositions = [
+   { x: -10, z: 8 },
+   { x: 7, z: -9 },
+   { x: 0, z: 10 },
+ ];
 
-// const trunks = []; // Array to store tree trunks for collision detection
+const trunks = []; // Array to store tree trunks for collision detection
 // Load the map
 const loadMap = () => {
     const mapLoader = new THREE.GLTFLoader();
@@ -100,7 +100,7 @@ const loadMap = () => {
 
             // Position and scale the map
             map.position.set(0, 0, 0); // Adjust based on your scene
-            map.scale.set(1, 1, 1); // Adjust scaling if necessary
+            map.scale.set(4, 4, 4); // Adjust scaling if necessary
 
             // Add the map to the scene
             scene.add(map);
