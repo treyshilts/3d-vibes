@@ -1,7 +1,6 @@
 let mixer = null;
 let walkAction = null;
 let redSphere = null;
-
 let isWalking = false; // Tracks whether Stevey is currently walking  
 
 let score = 0; // Default score
