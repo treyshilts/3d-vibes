@@ -60,70 +60,63 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
 // scene.add(ambientLight);
 
     // Ground
-    const groundGeometry = new THREE.PlaneGeometry(40, 40);
-    const textureLoader = new THREE.TextureLoader();
-    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
-    grassTexture.wrapS = THREE.RepeatWrapping;
-    grassTexture.wrapT = THREE.RepeatWrapping;
-    grassTexture.repeat.set(4, 4);
+    // const groundGeometry = new THREE.PlaneGeometry(40, 40);
+    // const textureLoader = new THREE.TextureLoader();
+    // const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
+    // grassTexture.wrapS = THREE.RepeatWrapping;
+    // grassTexture.wrapT = THREE.RepeatWrapping;
+    // grassTexture.repeat.set(4, 4);
 
-    const groundMaterial = new THREE.MeshLambertMaterial({ map: grassTexture });
-    const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-    ground.rotation.x = -Math.PI / 2;
-    scene.add(ground);
+    // const groundMaterial = new THREE.MeshLambertMaterial({ map: grassTexture });
+    // const ground = new THREE.Mesh(groundGeometry, groundMaterial);
+    // ground.rotation.x = -Math.PI / 2;
+    // scene.add(ground);
 
 // Tree positions
 // Tree Positions
-const treePositions = [{ x: -2, z: -4 }, { x: 3, z: 4 }];
-const biggerTreePositions = [{ x: 5, z: 6 }, { x: -4, z: -7 }];
-const smallerTreePositions = [
-  { x: 4, z: 3 },
-  { x: -6, z: 7 },
-  { x: 2, z: -5 },
-  { x: -8, z: 2 },
-  { x: 6, z: -3 },
-  { x: -3, z: -6 },
-];
-const largestTreePositions = [
-  { x: -10, z: 8 },
-  { x: 7, z: -9 },
-  { x: 0, z: 10 },
-];
+// const treePositions = [{ x: -2, z: -4 }, { x: 3, z: 4 }];
+// const biggerTreePositions = [{ x: 5, z: 6 }, { x: -4, z: -7 }];
+// const smallerTreePositions = [
+  // { x: 4, z: 3 },
+  // { x: -6, z: 7 },
+  // { x: 2, z: -5 },
+  // { x: -8, z: 2 },
+  // { x: 6, z: -3 },
+  // { x: -3, z: -6 },
+// ];
+// const largestTreePositions = [
+  // { x: -10, z: 8 },
+  // { x: 7, z: -9 },
+  // { x: 0, z: 10 },
+// ];
 
-const trunks = []; // Array to store tree trunks for collision detection
+// const trunks = []; // Array to store tree trunks for collision detection
+// Load the map
+const loadMap = () => {
+    const mapLoader = new THREE.GLTFLoader();
+    mapLoader.load(
+        'https://treyshilts.github.io/3d-vibes/mapsimple.early.glb', // Replace with your map's URL
+        (gltf) => {
+            const map = gltf.scene;
 
-// Function to create a tree
-const createTree = (x, z, scale = 1) => {
-  const barkTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bark.png');
-  const trunkMaterial = new THREE.MeshLambertMaterial({ map: barkTexture });
-  const trunkGeometry = new THREE.CylinderGeometry(0.2 * scale, 0.2 * scale, 2 * scale, 8);
-  const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
-  trunk.position.set(x, 1 * scale, z); // Adjust based on scale
-  trunks.push(trunk); // Add trunk to array
-  scene.add(trunk);
+            // Position and scale the map
+            map.position.set(0, 0, 0); // Adjust based on your scene
+            map.scale.set(1, 1, 1); // Adjust scaling if necessary
 
-  const bushTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bush.png');
-  const leavesMaterial = new THREE.MeshLambertMaterial({ map: bushTexture });
-  const leavesGeometry = new THREE.ConeGeometry(1 * scale, 2 * scale, 5);
-  const leaves = new THREE.Mesh(leavesGeometry, leavesMaterial);
-  leaves.position.set(x, 2 * scale, z); // Adjust based on scale
-  scene.add(leaves);
+            // Add the map to the scene
+            scene.add(map);
+
+            console.log('Map loaded successfully:', map);
+        },
+        undefined,
+        (error) => {
+            console.error('An error occurred while loading the map:', error);
+        }
+    );
 };
 
-// Add Normal Trees
-treePositions.forEach(({ x, z }) => createTree(x, z));
-
-// Add Bigger Trees (10% larger)
-biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.1)); // Scale = 1.1
-
-// Add Smaller Trees (10% smaller)
-smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 0.9)); // Scale = 0.9
-
-// Add Largest Trees (30% larger)
-largestTreePositions.forEach(({ x, z }) => createTree(x, z, 1.3)); // Scale = 1.3
-
-
-
+// Call the function to load the map
+loadMap();
 
     // Walls
     const walls = [];
