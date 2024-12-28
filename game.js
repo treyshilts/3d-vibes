@@ -94,7 +94,7 @@ const trunks = []; // Array to store tree trunks for collision detection
 const loadMap = () => {
     const mapLoader = new THREE.GLTFLoader();
     mapLoader.load(
-        'https://treyshilts.github.io/3d-vibes/map_summer3d_withcave.glb', // Replace with your map's URL
+        'https://treyshilts.github.io/3d-vibes/map_summer3d_withbettermountainsbridge.glb', // Replace with your map's URL
         (gltf) => {
             const map = gltf.scene;
 
