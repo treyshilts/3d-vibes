@@ -93,19 +93,30 @@ const trunks = []; // Array to store tree trunks for collision detection
 // Load the map
 const loadMap = () => {
     const mapLoader = new THREE.GLTFLoader();
+    const textureLoader = new THREE.TextureLoader();
+    
+    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
+
     mapLoader.load(
-        'https://treyshilts.github.io/3d-vibes/map_summer3d_withbettermountainsbridge.glb', // Replace with your map's URL
+        'https://treyshilts.github.io/3d-vibes/map_summer3d_withbettermountainsbridge.glb',
         (gltf) => {
             const map = gltf.scene;
 
+            // Traverse through the map to find the ground object and apply the texture
+            map.traverse((child) => {
+                if (child.isMesh && child.name.toLowerCase().includes('plane')) {
+                    child.material = new THREE.MeshStandardMaterial({ map: grassTexture });
+                }
+            });
+
             // Position and scale the map
-            map.position.set(0, 0, 0); // Adjust based on your scene
-            map.scale.set(7, 7, 7); // Adjust scaling if necessary
+            map.position.set(0, 0, 0); 
+            map.scale.set(7, 7, 7); 
 
             // Add the map to the scene
             scene.add(map);
 
-            console.log('Map loaded successfully:', map);
+            console.log('Map loaded successfully with ground textured:', map);
         },
         undefined,
         (error) => {
