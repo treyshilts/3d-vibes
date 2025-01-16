@@ -103,35 +103,29 @@ const loadMap = () => {
 
 
     mapLoader.load(
-        'https://treyshilts.github.io/3d-vibes/map_summer3d_withbettermountainsbridge.glb',
-        (gltf) => {
-            const map = gltf.scene;
+    'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_0125.glb',
+    (gltf) => {
+        const map = gltf.scene;
 
-            // Traverse through the map to find the ground object and apply the texture
-            map.traverse((child) => {
-                if (child.isMesh && child.name.toLowerCase().includes('plane')) {
-                    child.material = new THREE.MeshLambertMaterial({ map: grassTexture });
-                }
-            });
+        // Optional: Traverse through the map or log it for inspection
+        console.log('Map loaded successfully:', map);
 
-            // Position and scale the map
-            map.position.set(0, 0, 0); 
-            map.scale.set(7, 7, 7); 
+        // Position and scale the map
+        map.position.set(0, 0, 0); 
+        map.scale.set(7, 7, 7); 
 
-            // Add the map to the scene
-            scene.add(map);
-
-            console.log('Map loaded successfully with ground textured:', map);
-        },
-        undefined,
-        (error) => {
-            console.error('An error occurred while loading the map:', error);
-        }
-    );
-};
+        // Add the map to the scene
+        scene.add(map);
+    },
+    undefined,
+    (error) => {
+        console.error('An error occurred while loading the map:', error);
+    }
+);
 
 // Call the function to load the map
 loadMap();
+
 
     // Walls
     const walls = [];
