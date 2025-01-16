@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scene = new THREE.Scene();
 
     // Add the sky sphere
-    const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/skybox.jpg');
+    const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/orangesky.jpg');
     const skyGeometry = new THREE.SphereGeometry(400, 32, 32); // Increased size
     const skyMaterial = new THREE.MeshBasicMaterial({
       map: skyTexture,
@@ -101,6 +101,18 @@ const loadMap = () => {
         texture.repeat.set(30, 30);
     });
 
+    const waterTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/water.png', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(30, 30);
+    });
+
+        const moonTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/water.png', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(1, 1);
+    });
+
 
     mapLoader.load(
         'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_0125.glb',
@@ -109,8 +121,13 @@ const loadMap = () => {
 
             // Traverse through the map to find the ground object and apply the texture
             map.traverse((child) => {
-                if (child.isMesh && child.name.toLowerCase().includes('mainground')) {
-                    child.material = new THREE.MeshLambertMaterial({ map: grassTexture });
+                if (child.isMesh) {
+                    if (name.includes('mainground')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: grassTexture });
+                    else if (name.includes('lake')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: waterTexture });
+                    else if (name.includes('moon')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: moonTexture });
                 }
             });
 
