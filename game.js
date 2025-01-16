@@ -124,9 +124,9 @@ const loadMap = () => {
                 if (child.isMesh) {
                     if (name.includes('mainground')) {
                         child.material = new THREE.MeshLambertMaterial({ map: grassTexture });
-                    else if (name.includes('lake')) {
+                    } else if (name.includes('lake')) {
                         child.material = new THREE.MeshLambertMaterial({ map: waterTexture });
-                    else if (name.includes('moon')) {
+                    } else if (name.includes('moon')) {
                         child.material = new THREE.MeshLambertMaterial({ map: moonTexture });
                 }
             });
