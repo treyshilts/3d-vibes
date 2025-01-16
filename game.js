@@ -130,6 +130,7 @@ const loadMap = () => {
                         child.material = new THREE.MeshLambertMaterial({ map: waterTexture });
                     } else if (name.includes('moon')) {
                         child.material = new THREE.MeshLambertMaterial({ map: moonTexture });
+                    }
                 }
             });
 
