@@ -103,13 +103,13 @@ const loadMap = () => {
 
 
     mapLoader.load(
-        'https://treyshilts.github.io/3d-vibes/map_summer3d_withbettermountainsbridge.glb',
+        'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_0125.glb',
         (gltf) => {
             const map = gltf.scene;
 
             // Traverse through the map to find the ground object and apply the texture
             map.traverse((child) => {
-                if (child.isMesh && child.name.toLowerCase().includes('plane')) {
+                if (child.isMesh && child.name.toLowerCase().includes('mainground')) {
                     child.material = new THREE.MeshLambertMaterial({ map: grassTexture });
                 }
             });
