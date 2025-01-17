@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scene = new THREE.Scene();
 
     // Add the sky sphere
-    const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/orangesky2.jpg');
+    const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/orangesky2.png');
     const skyGeometry = new THREE.SphereGeometry(400, 32, 32); // Increased size
     const skyMaterial = new THREE.MeshBasicMaterial({
       map: skyTexture,
@@ -104,7 +104,7 @@ const loadMap = () => {
     const waterTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/water.png', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(30, 30);
+        texture.repeat.set(20, 10);
     });
 
         const moonTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/moon.jpg', (texture) => {
@@ -127,7 +127,12 @@ const loadMap = () => {
                     } else if (child.name.includes('lake')) {
                         child.material = new THREE.MeshLambertMaterial({ map: waterTexture });
                     } else if (child.name.includes('moon')) {
-                        child.material = new THREE.MeshLambertMaterial({ map: moonTexture });
+                        child.material = new THREE.MeshStandardMaterial({
+                            map: moonTexture,
+                            emissive: new THREE.Color(0xffffff),
+                            emissiveIntensity: 2,
+                            emissiveMap: moonTexture,
+                        });
                     }
                 }
             });
