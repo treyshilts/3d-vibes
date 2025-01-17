@@ -107,7 +107,7 @@ const loadMap = () => {
         texture.repeat.set(30, 30);
     });
 
-        const moonTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/water.png', (texture) => {
+        const moonTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/moon.jpg', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(1, 1);
@@ -122,11 +122,11 @@ const loadMap = () => {
             // Traverse through the map to find the ground object and apply the texture
             map.traverse((child) => {
                 if (child.isMesh) {
-                    if (name.includes('mainground')) {
+                    if (child.name.includes('mainground')) {
                         child.material = new THREE.MeshLambertMaterial({ map: grassTexture });
-                    } else if (name.includes('lake')) {
+                    } else if (child.name.includes('lake')) {
                         child.material = new THREE.MeshLambertMaterial({ map: waterTexture });
-                    } else if (name.includes('moon')) {
+                    } else if (child.name.includes('moon')) {
                         child.material = new THREE.MeshLambertMaterial({ map: moonTexture });
                     }
                 }
