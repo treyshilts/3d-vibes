@@ -95,6 +95,7 @@ const trunks = []; // Array to store tree trunks for collision detection
 
 // Function to create a tree
 const createTree = (x, z, scale = 1) => {
+  scale *= 2;
   const barkTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bark.png');
   const trunkMaterial = new THREE.MeshLambertMaterial({ map: barkTexture });
   const trunkGeometry = new THREE.CylinderGeometry(0.2 * scale, 0.2 * scale, 2 * scale, 8);
@@ -115,13 +116,13 @@ const createTree = (x, z, scale = 1) => {
 treePositions.forEach(({ x, z }) => createTree(x, z));
 
 // Add Bigger Trees (10% larger)
-biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.1)); // Scale = 1.1
+biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.6)); // Scale = 1.6
 
 // Add Smaller Trees (10% smaller)
-smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 0.9)); // Scale = 0.9
+smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 0.67)); // Scale = 0.67
 
 // Add Largest Trees (30% larger)
-largestTreePositions.forEach(({ x, z }) => createTree(x, z, 1.3)); // Scale = 1.3
+largestTreePositions.forEach(({ x, z }) => createTree(x, z, 2.0)); // Scale = 2.0
 
 // Load the map
 const loadMap = () => {
