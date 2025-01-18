@@ -95,7 +95,6 @@ const trunks = []; // Array to store tree trunks for collision detection
 
 // Function to create a tree
 const createTree = (x, z, scale = 1) => {
-  scale *= 2;
   const barkTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bark.png');
   const trunkMaterial = new THREE.MeshLambertMaterial({ map: barkTexture });
   const trunkGeometry = new THREE.CylinderGeometry(0.2 * scale, 0.2 * scale, 2 * scale, 8);
@@ -113,16 +112,16 @@ const createTree = (x, z, scale = 1) => {
 };
 
 // Add Normal Trees
-treePositions.forEach(({ x, z }) => createTree(x, z));
+treePositions.forEach(({ x, z }) => createTree(x, z, 2.0));
 
 // Add Bigger Trees (10% larger)
-biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.6)); // Scale = 1.6
+biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 3.2)); // Scale = 3.2
 
 // Add Smaller Trees (10% smaller)
-smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 0.67)); // Scale = 0.67
+smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.34)); // Scale = 1.34
 
 // Add Largest Trees (30% larger)
-largestTreePositions.forEach(({ x, z }) => createTree(x, z, 2.0)); // Scale = 2.0
+largestTreePositions.forEach(({ x, z }) => createTree(x, z, 4.0)); // Scale = 4.0
 
 // Load the map
 const loadMap = () => {
@@ -184,7 +183,7 @@ const loadMap = () => {
         const bridgeTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bridge.', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(1, 10);
+        texture.repeat.set(10, 1);
     });
 
 
@@ -217,13 +216,13 @@ const loadMap = () => {
                         child.material = new THREE.MeshLambertMaterial({ map: doorTexture });
                     } else if (child.name.includes('trunk')) {
                         child.material = new THREE.MeshLambertMaterial({ map: barkTexture });
-                    } else if (child.name.includes('house.roof')) {
+                    } else if (child.name.includes('.roof')) {
                         child.material = new THREE.MeshLambertMaterial({ map: roofTexture });
                     } else if (child.name.includes('tinyroof')) {
                         child.material = new THREE.MeshLambertMaterial({ map: roofTexture });
-                    } else if (child.name.includes('house.front')) {
+                    } else if (child.name.includes('.front')) {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
-                    } else if (child.name.includes('house.sides')) {
+                    } else if (child.name.includes('.sides')) {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
                     } else if (child.name.includes('tinyhouse')) {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
