@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('threejs-scene');
     const scene = new THREE.Scene();
 
-    scene.fog = new THREE.Fog(0xaaaaaa, 1, 40);
+    scene.fog = new THREE.Fog(0xaaaaaa, 1, 20);
 
     // Add the sky sphere
     const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/orangesky2.png');
@@ -459,12 +459,22 @@ const loadCadillac = () => {
 // Call the function to load the Cadillac
 loadCadillac();
 
-// Create the red sphere
-const sphereGeometry = new THREE.SphereGeometry(0.3, 16, 16);
-const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 }); // Red color
-redSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-redSphere.position.set(5, 0.3, 5); // Set the sphere's position
-scene.add(redSphere);
+// Function to create a red sphere at a specific position
+function createRedSphere(x, y, z) {
+    const sphereGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+    const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 }); // Red color
+    const redSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    redSphere.position.set(x, y, z); // Set the sphere's position
+    scene.add(redSphere);
+    return redSphere; // Return the sphere if you need to manipulate it later
+}
+
+// Add several red spheres at different positions
+createRedSphere(5, 0.3, 5);
+createRedSphere(3, 0.3, 7);
+createRedSphere(7, 0.3, 3);
+createRedSphere(2, 0.3, 6);
+createRedSphere(6, 0.3, 2);
 
     // Movement
     let movingForward = false;
