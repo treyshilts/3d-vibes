@@ -163,6 +163,8 @@ const loadMap = () => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(5, 5);
+        texture.rotation = Math.PI / 2;
+        texture.center.set(0.5, 0.5);
     });
 
         const barkTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bark.png', (texture) => {
@@ -175,6 +177,8 @@ const loadMap = () => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(5, 5);
+        texture.rotation = Math.PI / 2;
+        texture.center.set(0.5, 0.5);
     });
 
         const bridgeTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bridge.', (texture) => {
