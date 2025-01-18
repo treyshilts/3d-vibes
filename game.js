@@ -73,25 +73,56 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
      ground.rotation.x = -Math.PI / 2;
      scene.add(ground);
 
- // Tree positions
- // Tree Positions
- const treePositions = [{ x: -2, z: -4 }, { x: 3, z: 4 }];
- const biggerTreePositions = [{ x: 5, z: 6 }, { x: -4, z: -7 }];
- const smallerTreePositions = [
-   { x: 4, z: 3 },
-   { x: -6, z: 7 },
-   { x: 2, z: -5 },
-   { x: -8, z: 2 },
-   { x: 6, z: -3 },
-   { x: -3, z: -6 },
- ];
- const largestTreePositions = [
-   { x: -10, z: 8 },
-   { x: 7, z: -9 },
-   { x: 0, z: 10 },
- ];
+// Tree positions
+// Tree Positions
+const treePositions = [{ x: -2, z: -4 }, { x: 3, z: 4 }];
+const biggerTreePositions = [{ x: 5, z: 6 }, { x: -4, z: -7 }];
+const smallerTreePositions = [
+  { x: 4, z: 3 },
+  { x: -6, z: 7 },
+  { x: 2, z: -5 },
+  { x: -8, z: 2 },
+  { x: 6, z: -3 },
+  { x: -3, z: -6 },
+];
+const largestTreePositions = [
+  { x: -10, z: 8 },
+  { x: 7, z: -9 },
+  { x: 0, z: 10 },
+];
 
 const trunks = []; // Array to store tree trunks for collision detection
+
+// Function to create a tree
+const createTree = (x, z, scale = 1) => {
+  const barkTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bark.png');
+  const trunkMaterial = new THREE.MeshLambertMaterial({ map: barkTexture });
+  const trunkGeometry = new THREE.CylinderGeometry(0.2 * scale, 0.2 * scale, 2 * scale, 8);
+  const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
+  trunk.position.set(x, 1 * scale, z); // Adjust based on scale
+  trunks.push(trunk); // Add trunk to array
+  scene.add(trunk);
+
+  const bushTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bush.png');
+  const leavesMaterial = new THREE.MeshLambertMaterial({ map: bushTexture });
+  const leavesGeometry = new THREE.ConeGeometry(1 * scale, 2 * scale, 5);
+  const leaves = new THREE.Mesh(leavesGeometry, leavesMaterial);
+  leaves.position.set(x, 2 * scale, z); // Adjust based on scale
+  scene.add(leaves);
+};
+
+// Add Normal Trees
+treePositions.forEach(({ x, z }) => createTree(x, z));
+
+// Add Bigger Trees (10% larger)
+biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.1)); // Scale = 1.1
+
+// Add Smaller Trees (10% smaller)
+smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 0.9)); // Scale = 0.9
+
+// Add Largest Trees (30% larger)
+largestTreePositions.forEach(({ x, z }) => createTree(x, z, 1.3)); // Scale = 1.3
+
 // Load the map
 const loadMap = () => {
     const mapLoader = new THREE.GLTFLoader();
