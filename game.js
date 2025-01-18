@@ -425,40 +425,77 @@ gltf.animations.forEach((clip, index) => {
   }
 );
 
-
-
-
-
-
-
-
-
-
-
-
 // Load Cadillac
-const loadCadillac = () => {
-  const cadillacLoader = new THREE.OBJLoader();
-  const cadillacMtlLoader = new THREE.MTLLoader();
+//const loadCadillac = () => {
+//  const cadillacLoader = new THREE.OBJLoader();
+//  const cadillacMtlLoader = new THREE.MTLLoader();
 
-  cadillacMtlLoader.load('https://treyshilts.github.io/3d-vibes/cadillac.mtl', (materials) => {
-    materials.preload();
-    cadillacLoader.setMaterials(materials);
-    cadillacLoader.load(
-      'https://treyshilts.github.io/3d-vibes/cadillac.obj',
-      (object) => {
-        object.position.set(12, 0.5, 9); // Set Cadillac position
-        object.scale.set(0.0025, 0.0025, 0.0025);
-        object.rotation.y = Math.PI / 1.5; // Optional: Rotate for better alignment
-        scene.add(object);
-      }
-    );
-  });
-};
+//  cadillacMtlLoader.load('https://treyshilts.github.io/3d-vibes/cadillac.mtl', (materials) => {
+//    materials.preload();
+//    cadillacLoader.setMaterials(materials);
+//    cadillacLoader.load(
+//      'https://treyshilts.github.io/3d-vibes/cadillac.obj',
+//      (object) => {
+//        object.position.set(12, 0.5, 9); // Set Cadillac position
+//        object.scale.set(0.0025, 0.0025, 0.0025);
+//        object.rotation.y = Math.PI / 1.5; // Optional: Rotate for better alignment
+//        scene.add(object);
+//      }
+//    );
+//  });
+//};
 
 // Call the function to load the Cadillac
-loadCadillac();
+//loadCadillac();
 
+function createGrid(size) {
+    const gridGroup = new THREE.Group(); // Group to hold all grid elements
+
+    // Loop through the grid based on size
+    for (let x = 0; x < size; x++) {
+        for (let z = 0; z < size; z++) {
+            // Create a black grid square
+            const planeGeometry = new THREE.PlaneGeometry(1, 1);
+            const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+            const gridSquare = new THREE.Mesh(planeGeometry, planeMaterial);
+
+            // Position the square on the grid
+            gridSquare.rotation.x = -Math.PI / 2; // Make it flat
+            gridSquare.position.set(x, 0, z);
+            gridGroup.add(gridSquare);
+
+            // Add a yellow label at the center of each square
+            const labelCanvas = document.createElement('canvas');
+            const context = labelCanvas.getContext('2d');
+            labelCanvas.width = 128;
+            labelCanvas.height = 128;
+
+            // Draw the text on the canvas
+            context.fillStyle = 'yellow';
+            context.font = '32px Arial';
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            context.fillText(`(${x}, ${z})`, labelCanvas.width / 2, labelCanvas.height / 2);
+
+            // Create a texture from the canvas
+            const texture = new THREE.CanvasTexture(labelCanvas);
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+            const labelSprite = new THREE.Sprite(spriteMaterial);
+
+            // Adjust sprite position slightly above the grid
+            labelSprite.scale.set(0.5, 0.5, 0.5); // Adjust size to fit the grid square
+            labelSprite.position.set(x, 0.1, z); // Position slightly above the grid
+            gridGroup.add(labelSprite);
+        }
+    }
+
+    scene.add(gridGroup); // Add the grid to the scene
+}
+
+// Create a 10x10 grid
+createGrid(100);
+
+    
 function createRedSphere(x, y, z) {
     const sphereGeometry = new THREE.SphereGeometry(0.3, 16, 16);
     const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 }); // Red color
@@ -466,23 +503,6 @@ function createRedSphere(x, y, z) {
     redSphere.position.set(x, y, z); // Set the sphere's position
     scene.add(redSphere);
 }
-
-function createExpandingSquares(maxDistance, layerSpacing, sphereSpacing) {
-    for (let distance = 0; distance <= maxDistance; distance += layerSpacing) {
-        for (let x = -distance; x <= distance; x += sphereSpacing) {
-            for (let z = -distance; z <= distance; z += sphereSpacing) {
-                // Place spheres only on the perimeter of the current layer
-                if (Math.abs(x) === distance || Math.abs(z) === distance) {
-                    createRedSphere(x, 0.3, z);
-                }
-            }
-        }
-    }
-}
-
-// Generate spheres with layers spaced 5 units apart and spheres spaced 1 unit within each layer
-createExpandingSquares(100, 5, 1);
-
 
     // Movement
     let movingForward = false;
