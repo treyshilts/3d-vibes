@@ -177,6 +177,12 @@ const loadMap = () => {
         texture.repeat.set(5, 5);
     });
 
+        const bridgeTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bridge.', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(1, 10);
+    });
+
 
     mapLoader.load(
         'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_0125.glb',
@@ -198,7 +204,7 @@ const loadMap = () => {
                             emissiveMap: moonTexture,
                         });
                     } else if (child.name.includes('littlebridge')) {
-                        child.material = new THREE.MeshLambertMaterial({ color: 0x3b270c });
+                        child.material = new THREE.MeshLambertMaterial({ map: bridgeTexture });
                     } else if (child.name.includes('shroomstem')) {
                         child.material = new THREE.MeshLambertMaterial({ color: 0xFBEEAC });
                     } else if (child.name.includes('shroomtop')) {
