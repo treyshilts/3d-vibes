@@ -113,6 +113,36 @@ const loadMap = () => {
         texture.repeat.set(1, 1);
     });
 
+        const doorTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/door.png', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(1, 1);
+    });
+
+        const dirtTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/dirt.png', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(15, 15);
+    });
+
+        const brickTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/brick.png', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(5, 5);
+    });
+
+        const barkTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bark.png', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(5, 5);
+    });
+
+        const roofTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/roof2.jpeg', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(5, 5);
+    });
+
 
     mapLoader.load(
         'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_0125.glb',
@@ -129,11 +159,34 @@ const loadMap = () => {
                     } else if (child.name.includes('moon')) {
                         child.material = new THREE.MeshStandardMaterial({
                             map: moonTexture,
-                            emissive: new THREE.Color(0xffffff),
-                            emissiveIntensity: 2,
+                            emissive: new THREE.Color(0xEAEAEA),
+                            emissiveIntensity: 1,
                             emissiveMap: moonTexture,
                         });
-                    }
+                    } else if (child.name.includes('littlebridge')) {
+                        child.material = new THREE.MeshLambertMaterial({ color: 0x3b270c, });
+                    } else if (child.name.includes('shroomstem')) {
+                        child.material = new THREE.MeshLambertMaterial({ color: 0xFBEEAC, });
+                    } else if (child.name.includes('shroomtop')) {
+                        child.material = new THREE.MeshLambertMaterial({ color: 0x8B0000, });
+                    } else if (child.name.includes('door')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: doorTexture });
+                    } else if (child.name.includes('trunk')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: barkTexture });
+                    } else if (child.name.includes('trunk')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: barkTexture });
+                    } else if (child.name.includes('house.roof')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: roofTexture });
+                    } else if (child.name.includes('tinyroof')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: roofTexture });
+                    } else if (child.name.includes('house.front')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
+                    } else if (child.name.includes('house.sides')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
+                    } else if (child.name.includes('tinyhouse')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
+                    } else if (child.name.includes('dirt')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: dirtTexture });
                 }
             });
 
