@@ -164,15 +164,13 @@ const loadMap = () => {
                             emissiveMap: moonTexture,
                         });
                     } else if (child.name.includes('littlebridge')) {
-                        child.material = new THREE.MeshLambertMaterial({ color: 0x3b270c, });
+                        child.material = new THREE.MeshLambertMaterial({ color: 0x3b270c });
                     } else if (child.name.includes('shroomstem')) {
-                        child.material = new THREE.MeshLambertMaterial({ color: 0xFBEEAC, });
+                        child.material = new THREE.MeshLambertMaterial({ color: 0xFBEEAC });
                     } else if (child.name.includes('shroomtop')) {
-                        child.material = new THREE.MeshLambertMaterial({ color: 0x8B0000, });
+                        child.material = new THREE.MeshLambertMaterial({ color: 0x8B0000 });
                     } else if (child.name.includes('door')) {
                         child.material = new THREE.MeshLambertMaterial({ map: doorTexture });
-                    } else if (child.name.includes('trunk')) {
-                        child.material = new THREE.MeshLambertMaterial({ map: barkTexture });
                     } else if (child.name.includes('trunk')) {
                         child.material = new THREE.MeshLambertMaterial({ map: barkTexture });
                     } else if (child.name.includes('house.roof')) {
@@ -187,7 +185,7 @@ const loadMap = () => {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
                     } else if (child.name.includes('dirt')) {
                         child.material = new THREE.MeshLambertMaterial({ map: dirtTexture });
-                }
+                }}
             });
 
             // Position and scale the map
