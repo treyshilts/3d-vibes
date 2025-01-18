@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('threejs-scene');
     const scene = new THREE.Scene();
 
+    scene.fog = new THREE.Fog(0xaaaaaa, 10, 100);
+
     // Add the sky sphere
     const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/orangesky2.png');
     const skyGeometry = new THREE.SphereGeometry(400, 32, 32); // Increased size
