@@ -467,11 +467,11 @@ function createRedSphere(x, y, z) {
     scene.add(redSphere);
 }
 
-function createExpandingSquares(maxDistance, step) {
-    for (let distance = 0; distance <= maxDistance; distance += step) {
-        for (let x = -distance; x <= distance; x += step) {
-            for (let z = -distance; z <= distance; z += step) {
-                // Skip inner layers to avoid overlap
+function createExpandingSquares(maxDistance, layerSpacing, sphereSpacing) {
+    for (let distance = 0; distance <= maxDistance; distance += layerSpacing) {
+        for (let x = -distance; x <= distance; x += sphereSpacing) {
+            for (let z = -distance; z <= distance; z += sphereSpacing) {
+                // Place spheres only on the perimeter of the current layer
                 if (Math.abs(x) === distance || Math.abs(z) === distance) {
                     createRedSphere(x, 0.3, z);
                 }
@@ -480,8 +480,9 @@ function createExpandingSquares(maxDistance, step) {
     }
 }
 
-// Generate spheres up to a distance of 100, with a step of 5
-createExpandingSquares(100, 5);
+// Generate spheres with layers spaced 5 units apart and spheres spaced 1 unit within each layer
+createExpandingSquares(100, 5, 1);
+
 
     // Movement
     let movingForward = false;
