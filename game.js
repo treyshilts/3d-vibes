@@ -123,6 +123,41 @@ smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.34)); // Scale = 1
 // Add Largest Trees (30% larger)
 largestTreePositions.forEach(({ x, z }) => createTree(x, z, 4.0)); // Scale = 4.0
 
+// Create an HTML overlay for the text
+const coordinateDisplay = document.createElement('div');
+coordinateDisplay.style.position = 'absolute';
+coordinateDisplay.style.top = '50%';
+coordinateDisplay.style.left = '50%';
+coordinateDisplay.style.transform = 'translate(-50%, -50%)';
+coordinateDisplay.style.color = 'yellow';
+coordinateDisplay.style.fontSize = '24px';
+coordinateDisplay.style.fontFamily = 'Arial, sans-serif';
+coordinateDisplay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+coordinateDisplay.style.padding = '10px';
+coordinateDisplay.style.borderRadius = '5px';
+coordinateDisplay.style.display = 'none'; // Initially hidden
+document.body.appendChild(coordinateDisplay);
+
+// Function to get Stevey's position and update the display
+function showSteveyCoordinates() {
+    if (!stevey) return; // Ensure Stevey exists
+    const { x, y, z } = stevey.position;
+    coordinateDisplay.textContent = `Stevey's Coordinates: (${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)})`;
+    coordinateDisplay.style.display = 'block';
+
+    // Hide the display after 2 seconds
+    setTimeout(() => {
+        coordinateDisplay.style.display = 'none';
+    }, 2000);
+}
+
+// Listen for the spacebar key press
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {
+        showSteveyCoordinates();
+    }
+});
+    
 // Load the map
 const loadMap = () => {
     const mapLoader = new THREE.GLTFLoader();
@@ -447,54 +482,6 @@ gltf.animations.forEach((clip, index) => {
 
 // Call the function to load the Cadillac
 //loadCadillac();
-
-function createGrid(size) {
-    const gridGroup = new THREE.Group(); // Group to hold all grid elements
-
-    // Loop through the grid based on size
-    for (let x = 0; x < size; x++) {
-        for (let z = 0; z < size; z++) {
-            // Create a black grid square
-            const planeGeometry = new THREE.PlaneGeometry(1, 1);
-            const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-            const gridSquare = new THREE.Mesh(planeGeometry, planeMaterial);
-
-            // Position the square on the grid
-            gridSquare.rotation.x = -Math.PI / 2; // Make it flat
-            gridSquare.position.set(x, 0, z);
-            gridGroup.add(gridSquare);
-
-            // Add a yellow label at the center of each square
-            const labelCanvas = document.createElement('canvas');
-            const context = labelCanvas.getContext('2d');
-            labelCanvas.width = 128;
-            labelCanvas.height = 128;
-
-            // Draw the text on the canvas
-            context.fillStyle = 'yellow';
-            context.font = '32px Arial';
-            context.textAlign = 'center';
-            context.textBaseline = 'middle';
-            context.fillText(`(${x}, ${z})`, labelCanvas.width / 2, labelCanvas.height / 2);
-
-            // Create a texture from the canvas
-            const texture = new THREE.CanvasTexture(labelCanvas);
-            const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
-            const labelSprite = new THREE.Sprite(spriteMaterial);
-
-            // Adjust sprite position slightly above the grid
-            labelSprite.scale.set(0.5, 0.5, 0.5); // Adjust size to fit the grid square
-            labelSprite.position.set(x, 0.1, z); // Position slightly above the grid
-            gridGroup.add(labelSprite);
-        }
-    }
-
-    scene.add(gridGroup); // Add the grid to the scene
-}
-
-// Create a 10x10 grid
-createGrid(100);
-
     
 function createRedSphere(x, y, z) {
     const sphereGeometry = new THREE.SphereGeometry(0.3, 16, 16);
