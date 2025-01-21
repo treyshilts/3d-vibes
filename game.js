@@ -138,25 +138,13 @@ coordinateDisplay.style.borderRadius = '5px';
 coordinateDisplay.style.display = 'none'; // Initially hidden
 document.body.appendChild(coordinateDisplay);
 
-// Function to get Stevey's position and update the display
-function showSteveyCoordinates() {
-    if (!stevey) return; // Ensure Stevey exists
-    const { x, y, z } = stevey.position;
-    coordinateDisplay.textContent = `Stevey's Coordinates: (${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)})`;
-    coordinateDisplay.style.display = 'block';
-
-    // Hide the display after 2 seconds
-    setTimeout(() => {
-        coordinateDisplay.style.display = 'none';
-    }, 2000);
-}
-
-// Listen for the spacebar key press
-document.addEventListener('keydown', (event) => {
-    if (event.code === 'Space') {
-        showSteveyCoordinates();
+function updatePosition() {
+    if (stevey) {
+        const x = stevey.position.x.toFixed(2); // Limit to 2 decimal places
+        const z = stevey.position.z.toFixed(2); // Limit to 2 decimal places
+        document.getElementById("position").textContent = `(${x}, ${z})`;
     }
-});
+}
     
 // Load the map
 const loadMap = () => {
@@ -565,6 +553,10 @@ const animate = () => {
         offset.applyMatrix4(rotationMatrix);
         camera.position.copy(stevey.position.clone().add(offset));
         camera.lookAt(stevey.position.x, stevey.position.y + 1.7, stevey.position.z);
+
+        const x = stevey.position.x.toFixed(2);
+        const z = stevey.position.z.toFixed(2);
+        document.getElementById("position").textContent = `(${x}, ${z})`;
     }
 // Collision detection between Stevey and the red sphere
 if (stevey && redSphere) {
