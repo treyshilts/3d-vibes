@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('threejs-scene');
     const scene = new THREE.Scene();
 
-    // scene.fog = new THREE.Fog(0xaaaaaa, 1, 20);
+    scene.fog = new THREE.Fog(0xaaaaaa, 4, 60);
 
     // Add the sky sphere
     const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/night.png');
