@@ -59,15 +59,15 @@
     justify-content: center;
     align-items: center;
     /* Center the arrows inside the button */
-    background: #808080;
-    /* Grey background for all buttons */
-    color: white;
-    /* White text for contrast */
+    background: #FFFFFF;
+    /* white background for all buttons */
+    color: black;
+    /* black text for contrast */
   }
 
   #controls button:active {
     transform: scale(0.95);
-    background: #606060;
+    background: #FFFFFF;
     /* Slightly darker grey when pressed */
   }
 
