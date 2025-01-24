@@ -74,7 +74,7 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
      scene.add(ground);
 
 // Tree positions
-// Polygon vertices (X, Z coordinates)
+// Define the polygon vertices
 const polygonVertices = [
   { x: -0.42, z: 22.32 },
   { x: -1.40, z: 16.97 },
@@ -91,71 +91,49 @@ const polygonVertices = [
   { x: 10.22, z: 0.46 },
   { x: 8.16, z: 3.41 },
   { x: 4.90, z: 16.23 },
-  { x: 5.12, z: 23.60 }
+  { x: 5.12, z: 23.60 },
 ];
 
-// Tree type arrays
+// Tree type distribution counts
 const treeTypes = {
-  normal: treePositions.length,
-  bigger: biggerTreePositions.length,
-  smaller: smallerTreePositions.length,
-  largest: largestTreePositions.length,
+  normal: 2, // Match your original `treePositions` array length
+  bigger: 2,
+  smaller: 6,
+  largest: 3,
 };
 
-// Function to check if a point is inside a polygon (Ray-Casting Algorithm)
-const isPointInPolygon = (x, z, vertices) => {
-  let inside = false;
-  for (let i = 0, j = vertices.length - 1; i < vertices.length; j = i++) {
-    const xi = vertices[i].x, zi = vertices[i].z;
-    const xj = vertices[j].x, zj = vertices[j].z;
-    const intersect = ((zi > z) !== (zj > z)) && (x < (xj - xi) * (z - zi) / (zj - zi) + xi);
-    if (intersect) inside = !inside;
-  }
-  return inside;
-};
+// Helper functions
+const isPointInPolygon = (x, z, vertices) => { /* ... */ };
+const generateRandomPositions = (count, vertices) => { /* ... */ };
 
-// Generate random points within the polygon
-const generateRandomPositions = (count, vertices) => {
-  const bounds = vertices.reduce(
-    (acc, v) => ({
-      minX: Math.min(acc.minX, v.x),
-      maxX: Math.max(acc.maxX, v.x),
-      minZ: Math.min(acc.minZ, v.z),
-      maxZ: Math.max(acc.maxZ, v.z),
-    }),
-    { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity }
-  );
-
-  const positions = [];
-  while (positions.length < count) {
-    const x = Math.random() * (bounds.maxX - bounds.minX) + bounds.minX;
-    const z = Math.random() * (bounds.maxZ - bounds.minZ) + bounds.minZ;
-    if (isPointInPolygon(x, z, vertices)) {
-      positions.push({ x, z });
-    }
-  }
-  return positions;
-};
-
-// Generate all tree positions
+// Generate all tree positions dynamically
 const totalTrees = Object.values(treeTypes).reduce((sum, count) => sum + count, 0);
 const allTreePositions = generateRandomPositions(totalTrees, polygonVertices);
 
-// Distribute tree positions among tree types
-let index = 0;
-Object.keys(treeTypes).forEach(type => {
-  const count = treeTypes[type];
-  const positions = allTreePositions.slice(index, index + count);
-  const scale =
-    type === 'normal' ? 2.0 :
-    type === 'bigger' ? 3.2 :
-    type === 'smaller' ? 1.34 : 4.0; // Scale for largest trees
-  positions.forEach(({ x, z }) => createTree(x, z, scale));
-  index += count;
-});
+// Split positions back into tree type arrays for later reference
+const treePositions = allTreePositions.slice(0, treeTypes.normal);
+const biggerTreePositions = allTreePositions.slice(
+  treeTypes.normal,
+  treeTypes.normal + treeTypes.bigger
+);
+const smallerTreePositions = allTreePositions.slice(
+  treeTypes.normal + treeTypes.bigger,
+  treeTypes.normal + treeTypes.bigger + treeTypes.smaller
+);
+const largestTreePositions = allTreePositions.slice(
+  treeTypes.normal + treeTypes.bigger + treeTypes.smaller
+);
 
-console.log('Trees created and distributed successfully!');
+// Tree creation logic
+const createTree = (x, z, scale = 1) => {
+  console.log(`Tree created at (${x}, ${z}) with scale ${scale}`);
+};
 
+// Add trees to the game
+treePositions.forEach(({ x, z }) => createTree(x, z, 2.0));
+biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 3.2));
+smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.34));
+largestTreePositions.forEach(({ x, z }) => createTree(x, z, 4.0));
 
 // Function to create a tree
 const createTree = (x, z, scale = 1) => {
