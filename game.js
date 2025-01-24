@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('threejs-scene');
     const scene = new THREE.Scene();
 
-    // scene.fog = new THREE.Fog(0xaaaaaa, 0.5, 30);
+    scene.fog = new THREE.Fog(0xaaaaaa, 0.5, 30);
 
     // Add the sky sphere
     const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/night.png');
@@ -74,66 +74,24 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
      scene.add(ground);
 
 // Tree positions
-// Define the polygon vertices
-const polygonVertices = [
-  { x: -0.42, z: 22.32 },
-  { x: -1.40, z: 16.97 },
-  { x: -9.86, z: 6.75 },
-  { x: -12.03, z: -1.34 },
-  { x: -26.58, z: 2.61 },
-  { x: -26.51, z: 11.04 },
-  { x: -12.58, z: 12.30 },
-  { x: -9.23, z: 18.31 },
-  { x: -8.93, z: 32.62 },
-  { x: 8.19, z: 31.92 },
-  { x: 17.18, z: 6.66 },
-  { x: 13.51, z: -0.33 },
-  { x: 10.22, z: 0.46 },
-  { x: 8.16, z: 3.41 },
-  { x: 4.90, z: 16.23 },
-  { x: 5.12, z: 23.60 },
+// Tree Positions
+const treePositions = [{ x: -2, z: -4 }, { x: 3, z: 4 }];
+const biggerTreePositions = [{ x: 5, z: 6 }, { x: -4, z: -7 }];
+const smallerTreePositions = [
+  { x: 4, z: 3 },
+  { x: -6, z: 7 },
+  { x: 2, z: -5 },
+  { x: -8, z: 2 },
+  { x: 6, z: -3 },
+  { x: -3, z: -6 },
+];
+const largestTreePositions = [
+  { x: -10, z: 8 },
+  { x: 7, z: -9 },
+  { x: 0, z: 10 },
 ];
 
-// Tree type distribution counts
-const treeTypes = {
-  normal: 2, // Match your original `treePositions` array length
-  bigger: 2,
-  smaller: 6,
-  largest: 3,
-};
-
-// Helper functions
-const isPointInPolygon = (x, z, vertices) => { /* ... */ };
-const generateRandomPositions = (count, vertices) => { /* ... */ };
-
-// Generate all tree positions dynamically
-const totalTrees = Object.values(treeTypes).reduce((sum, count) => sum + count, 0);
-const allTreePositions = generateRandomPositions(totalTrees, polygonVertices);
-
-// Split positions back into tree type arrays for later reference
-const treePositions = allTreePositions.slice(0, treeTypes.normal);
-const biggerTreePositions = allTreePositions.slice(
-  treeTypes.normal,
-  treeTypes.normal + treeTypes.bigger
-);
-const smallerTreePositions = allTreePositions.slice(
-  treeTypes.normal + treeTypes.bigger,
-  treeTypes.normal + treeTypes.bigger + treeTypes.smaller
-);
-const largestTreePositions = allTreePositions.slice(
-  treeTypes.normal + treeTypes.bigger + treeTypes.smaller
-);
-
-// Tree creation logic
-const createTree = (x, z, scale = 1) => {
-  console.log(`Tree created at (${x}, ${z}) with scale ${scale}`);
-};
-
-// Add trees to the game
-treePositions.forEach(({ x, z }) => createTree(x, z, 2.0));
-biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 3.2));
-smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.34));
-largestTreePositions.forEach(({ x, z }) => createTree(x, z, 4.0));
+const trunks = []; // Array to store tree trunks for collision detection
 
 // Function to create a tree
 const createTree = (x, z, scale = 1) => {
