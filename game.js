@@ -74,24 +74,88 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
      scene.add(ground);
 
 // Tree positions
-// Tree Positions
-const treePositions = [{ x: -2, z: -4 }, { x: 3, z: 4 }];
-const biggerTreePositions = [{ x: 5, z: 6 }, { x: -4, z: -7 }];
-const smallerTreePositions = [
-  { x: 4, z: 3 },
-  { x: -6, z: 7 },
-  { x: 2, z: -5 },
-  { x: -8, z: 2 },
-  { x: 6, z: -3 },
-  { x: -3, z: -6 },
-];
-const largestTreePositions = [
-  { x: -10, z: 8 },
-  { x: 7, z: -9 },
-  { x: 0, z: 10 },
+// Polygon vertices (X, Z coordinates)
+const polygonVertices = [
+  { x: -0.42, z: 22.32 },
+  { x: -1.40, z: 16.97 },
+  { x: -9.86, z: 6.75 },
+  { x: -12.03, z: -1.34 },
+  { x: -26.58, z: 2.61 },
+  { x: -26.51, z: 11.04 },
+  { x: -12.58, z: 12.30 },
+  { x: -9.23, z: 18.31 },
+  { x: -8.93, z: 32.62 },
+  { x: 8.19, z: 31.92 },
+  { x: 17.18, z: 6.66 },
+  { x: 13.51, z: -0.33 },
+  { x: 10.22, z: 0.46 },
+  { x: 8.16, z: 3.41 },
+  { x: 4.90, z: 16.23 },
+  { x: 5.12, z: 23.60 }
 ];
 
-const trunks = []; // Array to store tree trunks for collision detection
+// Tree type arrays
+const treeTypes = {
+  normal: treePositions.length,
+  bigger: biggerTreePositions.length,
+  smaller: smallerTreePositions.length,
+  largest: largestTreePositions.length,
+};
+
+// Function to check if a point is inside a polygon (Ray-Casting Algorithm)
+const isPointInPolygon = (x, z, vertices) => {
+  let inside = false;
+  for (let i = 0, j = vertices.length - 1; i < vertices.length; j = i++) {
+    const xi = vertices[i].x, zi = vertices[i].z;
+    const xj = vertices[j].x, zj = vertices[j].z;
+    const intersect = ((zi > z) !== (zj > z)) && (x < (xj - xi) * (z - zi) / (zj - zi) + xi);
+    if (intersect) inside = !inside;
+  }
+  return inside;
+};
+
+// Generate random points within the polygon
+const generateRandomPositions = (count, vertices) => {
+  const bounds = vertices.reduce(
+    (acc, v) => ({
+      minX: Math.min(acc.minX, v.x),
+      maxX: Math.max(acc.maxX, v.x),
+      minZ: Math.min(acc.minZ, v.z),
+      maxZ: Math.max(acc.maxZ, v.z),
+    }),
+    { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity }
+  );
+
+  const positions = [];
+  while (positions.length < count) {
+    const x = Math.random() * (bounds.maxX - bounds.minX) + bounds.minX;
+    const z = Math.random() * (bounds.maxZ - bounds.minZ) + bounds.minZ;
+    if (isPointInPolygon(x, z, vertices)) {
+      positions.push({ x, z });
+    }
+  }
+  return positions;
+};
+
+// Generate all tree positions
+const totalTrees = Object.values(treeTypes).reduce((sum, count) => sum + count, 0);
+const allTreePositions = generateRandomPositions(totalTrees, polygonVertices);
+
+// Distribute tree positions among tree types
+let index = 0;
+Object.keys(treeTypes).forEach(type => {
+  const count = treeTypes[type];
+  const positions = allTreePositions.slice(index, index + count);
+  const scale =
+    type === 'normal' ? 2.0 :
+    type === 'bigger' ? 3.2 :
+    type === 'smaller' ? 1.34 : 4.0; // Scale for largest trees
+  positions.forEach(({ x, z }) => createTree(x, z, scale));
+  index += count;
+});
+
+console.log('Trees created and distributed successfully!');
+
 
 // Function to create a tree
 const createTree = (x, z, scale = 1) => {
