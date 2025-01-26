@@ -851,13 +851,13 @@ const createTree = (x, z, scale = 1) => {
 treePositions.forEach(({ x, z }) => createTree(x, z, 2.0));
 
 // Add Bigger Trees (10% larger)
-biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 3.2)); // Scale = 3.2
+biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 2.25)); // Scale = 3.2
 
 // Add Smaller Trees (10% smaller)
-smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.34)); // Scale = 1.34
+smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.8)); // Scale = 1.34
 
 // Add Largest Trees (30% larger)
-largestTreePositions.forEach(({ x, z }) => createTree(x, z, 4.0)); // Scale = 4.0
+largestTreePositions.forEach(({ x, z }) => createTree(x, z, 2.5)); // Scale = .0
 
 // Create an HTML overlay for the text
 const coordinateDisplay = document.createElement('div');
@@ -1143,7 +1143,7 @@ gltfLoader.load(
 
     // Set initial position and rotation
     stevey.position.set(2.22, 0, 14.85);
-    stevey.rotation.set(0, Math.PI, 0);
+    stevey.rotation.set(0, 0, 0);
 
     // Calculate bounding box and normalize size
     const boundingBox = new THREE.Box3().setFromObject(stevey);
