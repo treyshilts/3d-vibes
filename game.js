@@ -1879,8 +1879,8 @@ gltfLoader.load(
     stevey = gltf.scene;
 
     // Set initial position and rotation
-    stevey.position.set(0, 0, 0);
-    stevey.rotation.set(0, 0, 0);
+    stevey.position.set(2.22, 0, 14.85);
+    stevey.rotation.set(0, Math.PI, 0);
 
     // Calculate bounding box and normalize size
     const boundingBox = new THREE.Box3().setFromObject(stevey);
