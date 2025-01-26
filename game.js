@@ -74,7 +74,7 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
      scene.add(ground);
 
 // Tree Positions
-const treePositions = [[
+const treePositions = [
     {
         "x": -21.22,
         "z": 3.51
