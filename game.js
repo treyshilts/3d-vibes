@@ -73,23 +73,11 @@ canvas.style.imageRendering = 'crisp-edges'; // Other browsers
      ground.rotation.x = -Math.PI / 2;
      scene.add(ground);
 
-// Tree positions
 // Tree Positions
-const treePositions = [{ x: -2, z: -4 }, { x: 3, z: 4 }];
-const biggerTreePositions = [{ x: 5, z: 6 }, { x: -4, z: -7 }];
-const smallerTreePositions = [
-  { x: 4, z: 3 },
-  { x: -6, z: 7 },
-  { x: 2, z: -5 },
-  { x: -8, z: 2 },
-  { x: 6, z: -3 },
-  { x: -3, z: -6 },
-];
-const largestTreePositions = [
-  { x: -10, z: 8 },
-  { x: 7, z: -9 },
-  { x: 0, z: 10 },
-];
+const treePositions = [];
+const biggerTreePositions = [];
+const smallerTreePositions = [];
+const largestTreePositions = [];
 
 const trunks = []; // Array to store tree trunks for collision detection
 
