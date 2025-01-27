@@ -1142,7 +1142,7 @@ gltfLoader.load(
     stevey = gltf.scene;
 
     // Set initial position and rotation
-    stevey.position.set(2.22, 0, 14.85);
+    stevey.position.set(0, 0, 0);
     stevey.rotation.set(0, 0, 0);
 
     // Calculate bounding box and normalize size
@@ -1168,7 +1168,7 @@ gltfLoader.load(
         walkAction.clampWhenFinished = true;
         mixer.timeScale = 2; // Set the animation speed to 2x
     }
-
+    stevey.position.set(2.22, 0, 14.85)
     console.log('Model loaded and scaled:', stevey);
     console.log('Animations:', gltf.animations);
 console.log('Animations:', gltf.animations);
