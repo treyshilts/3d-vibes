@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('threejs-scene');
     const scene = new THREE.Scene();
 
-    scene.fog = new THREE.Fog(0xaaaaaa, 0.5, 30);
+    // scene.fog = new THREE.Fog(0xaaaaaa, 0.5, 30);
 
     // Add the sky sphere
     const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/night.png');
@@ -975,13 +975,13 @@ const loadMap = () => {
                         child.material = new THREE.MeshLambertMaterial({ map: doorTexture });
                     } else if (child.name.includes('trunk')) {
                         child.material = new THREE.MeshLambertMaterial({ map: barkTexture });
-                    } else if (child.name.includes('.roof')) {
+                    } else if (child.name.includes('house.roof')) {
                         child.material = new THREE.MeshLambertMaterial({ map: roofTexture });
                     } else if (child.name.includes('tinyroof')) {
                         child.material = new THREE.MeshLambertMaterial({ map: roofTexture });
-                    } else if (child.name.includes('.front')) {
+                    } else if (child.name.includes('house.front')) {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
-                    } else if (child.name.includes('.sides')) {
+                    } else if (child.name.includes('house.sides')) {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
                     } else if (child.name.includes('tinyhouse')) {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
