@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // Renderer setup
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: false });
-renderer.setSize(140, 140); // Render at a small resolution
+renderer.setSize(70, 70); // Render at a small resolution
 renderer.setPixelRatio(1); // Avoid high DPI scaling
 
 // Scale up with CSS
