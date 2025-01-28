@@ -45,7 +45,29 @@ canvas.style.imageRendering = 'pixelated';
 canvas.style.imageRendering = '-moz-crisp-edges'; // Firefox
 canvas.style.imageRendering = 'crisp-edges'; // Other browsers
 
+// collision w/ objects in glb
+const collidableNames = [
+  'house.front',
+  'house.sides',
+  'tinyhouse2',
+  'tinyhouse3',
+  'tinyhouse4',
+  'tinyhouse1',
+  'trunk2',
+  'trunk2.front',
+  'trunk2.back',
+  'trunk1.back',
+  'trunk1.front',
+  'trunk1',
+];
 
+    const collidables = [];
+
+map.traverse((child) => {
+  if (collidableNames.includes(child.name)) {
+    collidables.push(child);
+  }
+});
 
     // Light
     const light = new THREE.DirectionalLight(0xffffff, 1.0);
@@ -1224,13 +1246,31 @@ function createRedSphere(x, y, z) {
     const rotationSpeed = 0.025;
 
     const detectCollision = (x, z) => {
-      return trunks.some(trunk => {
+      // Check collision with collidables
+      const collidesWithObjects = collidables.some((obj) => {
+        const objPosition = new THREE.Vector3();
+        obj.getWorldPosition(objPosition); // Get the object's world position
+    
+        const dx = x - objPosition.x;
+        const dz = z - objPosition.z;
+        const distance = Math.sqrt(dx * dx + dz * dz);
+    
+        return distance < 0.9; // Adjust collision radius as needed
+      });
+    
+      // Check collision with trunks
+      const collidesWithTrunks = trunks.some((trunk) => {
         const dx = x - trunk.position.x;
         const dz = z - trunk.position.z;
         const distance = Math.sqrt(dx * dx + dz * dz);
+    
         return distance < 0.5; // Collision radius
       });
+    
+      // Return true if collision detected with any object or trunk
+      return collidesWithObjects || collidesWithTrunks;
     };
+
 
     const detectWallCollision = (x, z) => {
       return walls.some(wall => {
