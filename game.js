@@ -63,12 +63,6 @@ const collidableNames = [
 
     const collidables = [];
 
-map.traverse((child) => {
-  if (collidableNames.includes(child.name)) {
-    collidables.push(child);
-  }
-});
-
     // Light
     const light = new THREE.DirectionalLight(0xffffff, 1.0);
     light.position.set(5, 10, 5);
@@ -1011,7 +1005,13 @@ const loadMap = () => {
                         child.material = new THREE.MeshLambertMaterial({ map: dirtTexture });
                 }}
             });
-
+    
+            map.traverse((child) => {
+                if (collidableNames.includes(child.name)) {
+                    collidables.push(child);
+                }
+            });
+            
             // Position and scale the map
             map.position.set(0, 0, 0); 
             map.scale.set(7, 7, 7); 
