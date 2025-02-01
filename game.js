@@ -5,6 +5,15 @@ let isWalking = false; // Tracks whether Stevey is currently walking
 
 let score = 0; // Default score
 
+  window.onload = function() {
+    let overlay = document.getElementById("black-overlay");
+    overlay.style.transition = "opacity 4s ease-out";
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 4000);
+  };
+
 const updateScore = (newScore) => {
     score = newScore;
     document.getElementById('score').textContent = score;
