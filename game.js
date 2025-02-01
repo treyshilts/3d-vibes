@@ -11,7 +11,7 @@ let score = 0; // Default score
     overlay.style.opacity = "0";
     setTimeout(() => {
       overlay.style.display = "none";
-    }, 4000);
+    }, 6000);
   };
 
 const updateScore = (newScore) => {
