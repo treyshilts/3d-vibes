@@ -7,11 +7,30 @@ let score = 0; // Default score
 
   window.onload = function() {
     let overlay = document.getElementById("black-overlay");
+
+    // Initial fade-out after 4 seconds
     overlay.style.transition = "opacity 4s ease-out";
     overlay.style.opacity = "0";
+    
     setTimeout(() => {
       overlay.style.display = "none";
     }, 6000);
+
+    // Fade to black at 9000ms (9 seconds)
+    setTimeout(() => {
+      overlay.style.display = "block"; // Make sure it reappears
+      overlay.style.opacity = "1";
+    }, 9000);
+
+    // Fade back out 4000ms later (at 13s)
+    setTimeout(() => {
+      overlay.style.opacity = "0";
+    }, 13000);
+
+    // Remove it completely 1000ms after fading out (at 14s)
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 14000);
   };
 
 const updateScore = (newScore) => {
