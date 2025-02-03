@@ -2,7 +2,7 @@
     width: 420px;
     height: 420px;
     background: white;
-    border: 5px solid black;
+    border: 0px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
