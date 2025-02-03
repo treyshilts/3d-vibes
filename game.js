@@ -14,14 +14,17 @@ let score = 0; // Default score
     overlay.style.opacity = "0";
     
     setTimeout(() => {
-        fp_logo.style.opacity = "0";
+        overlay.style.transition = "opacity 3s ease-out";
         overlay.style.opacity = "1"; // Fade back to black
     }, 3500);
 
     setTimeout(() => {
-        fp_logo.style.zIndex = -4000;  
-        overlay.style.zIndex = -4000;
+        overlay.style.transition = "opacity 3s ease-out";
+        fp_logo.style.transition = "opacity 3s ease-out";
+        fp_logo.style.opacity = "0";
+        fp_logo.style.zIndex = -4000;
         overlay.style.opacity = "0";
+        overlay.style.zIndex = -4000
     }, 8000);
   };
 
