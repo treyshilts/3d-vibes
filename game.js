@@ -14,15 +14,15 @@ let score = 0; // Default score
     overlay.style.opacity = "0";
     
     setTimeout(() => {
-        fp_logo.style.zIndex = -4000;
         fp_logo.style.opacity = "0";
         overlay.style.opacity = "1"; // Fade back to black
     }, 3500);
 
     setTimeout(() => {
+        fp_logo.style.zIndex = -4000;  
         overlay.style.zIndex = -4000;
         overlay.style.opacity = "0";
-    }, 4500);
+    }, 8000);
   };
 
 const updateScore = (newScore) => {
