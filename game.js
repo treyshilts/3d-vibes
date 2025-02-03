@@ -10,14 +10,19 @@ let score = 0; // Default score
     let fp_logo = document.getElementById("full-screen-image");
 
     // Initial fade-out after 4 seconds
-    overlay.style.transition = "opacity 4s ease-out";
+    overlay.style.transition = "opacity 3s ease-out";
     overlay.style.opacity = "0";
     
     setTimeout(() => {
         fp_logo.style.zIndex = -4000;
         fp_logo.style.opacity = "0";
         overlay.style.opacity = "1"; // Fade back to black
-    }, 5000);
+    }, 3500);
+
+    setTimeout(() => {
+        overlay.style.zIndex = -4000;
+        overlay.style.opacity = "0";
+    }, 4500);
   };
 
 const updateScore = (newScore) => {
