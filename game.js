@@ -8,12 +8,14 @@ let score = 0; // Default score
 window.onload = function() {
     let overlay = document.getElementById("black-overlay");
     let fp_logo = document.getElementById("full-screen-image");
+    let playButton = document.getElementById("play-button");
 
     // Ensure smooth transitions
     overlay.style.transition = "opacity 3s ease-out";
     fp_logo.style.transition = "opacity 3s ease-out";
+    playButton.style.transition = "opacity 3s ease-out";
 
-    // Initial fade-out after 4 seconds
+    // Initial fade-out after 1 second
     setTimeout(() => {
         overlay.style.opacity = "0";
     }, 1000); 
@@ -38,6 +40,25 @@ window.onload = function() {
             overlay.style.zIndex = "-4000";
         }, 6000);
     }, 6100);
+
+    // Play button click event
+    playButton.addEventListener("click", function() {
+        overlay.style.opacity = "1"; // Fade back in over 3 seconds
+        overlay.style.zIndex = "9999"; // Ensure it's on top
+
+        setTimeout(() => {
+            fp_logo.style.opacity = "0"; // Hide splash screen
+            playButton.style.opacity = "0"; // Hide play button
+        }, 3000); // After fade-in completes
+
+        setTimeout(() => {
+            overlay.style.opacity = "0"; // Fade back out
+        }, 4000); // 1s after elements disappear
+
+        setTimeout(() => {
+            overlay.style.zIndex = "-4000"; // Move behind everything
+        }, 7000); // After fade-out is done
+    });
 };
 
 
