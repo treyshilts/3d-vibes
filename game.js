@@ -29,7 +29,7 @@ let score = 0; // Default score
 
     // Remove it completely 1000ms after fading out (at 14s)
     setTimeout(() => {
-      overlay.style.display = "none";
+      overlay.style.zIndex = "-1";
     }, 14000);
   };
 
