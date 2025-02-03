@@ -15,7 +15,7 @@ let score = 0; // Default score
     
     setTimeout(() => {
         overlay.style.opacity = "1"; // Fade back to black
-    }, 9000);
+    }, 5000);
   };
 
 const updateScore = (newScore) => {
