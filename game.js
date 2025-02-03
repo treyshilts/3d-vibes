@@ -5,28 +5,41 @@ let isWalking = false; // Tracks whether Stevey is currently walking
 
 let score = 0; // Default score
 
-  window.onload = function() {
+window.onload = function() {
     let overlay = document.getElementById("black-overlay");
     let fp_logo = document.getElementById("full-screen-image");
 
-    // Initial fade-out after 4 seconds
+    // Ensure smooth transitions
     overlay.style.transition = "opacity 3s ease-out";
-    overlay.style.opacity = "0";
-    
-    setTimeout(() => {
-        overlay.style.transition = "opacity 3s ease-out";
-        overlay.style.opacity = "1"; // Fade back to black
-    }, 3500);
+    fp_logo.style.transition = "opacity 3s ease-out";
 
+    // Initial fade-out after 4 seconds
     setTimeout(() => {
-        overlay.style.transition = "opacity 3s ease-out";
-        fp_logo.style.transition = "opacity 3s ease-out";
-        fp_logo.style.opacity = "0";
-        fp_logo.style.zIndex = -4000;
         overlay.style.opacity = "0";
-        overlay.style.zIndex = -4000
+    }, 1000); 
+
+    // Fade back to black after 3.5 seconds
+    setTimeout(() => {
+        overlay.style.opacity = "1";
+    }, 4500);
+
+    // Final fade-out after 8 seconds
+    setTimeout(() => {
+        fp_logo.style.opacity = "0";
+        
+        // Delay zIndex update to ensure fade-out is visible
+        setTimeout(() => {
+            fp_logo.style.zIndex = "-4000";
+            overlay.style.opacity = "0";
+        }, 3000); // Wait for fade-out to finish before hiding
+
+        // Hide overlay properly after fade-out
+        setTimeout(() => {
+            overlay.style.zIndex = "-4000";
+        }, 6000);
     }, 8000);
-  };
+};
+
 
 const updateScore = (newScore) => {
     score = newScore;
