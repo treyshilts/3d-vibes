@@ -5,62 +5,25 @@ let isWalking = false; // Tracks whether Stevey is currently walking
 
 let score = 0; // Default score
 
-window.onload = function() {
-    let overlay = document.getElementById("black-overlay");
-    let fp_logo = document.getElementById("full-screen-image");
-    let playButton = document.getElementById("play-button");
+// Play button click event
+playButton.addEventListener("click", function() {
+    overlay.style.opacity = "1"; // Fade back in over 3 seconds
+    overlay.style.zIndex = "9999"; // Ensure it's on top
 
-    // Ensure smooth transitions
-    overlay.style.transition = "opacity 3s ease-out";
-    fp_logo.style.transition = "opacity 3s ease-out";
-    playButton.style.transition = "opacity 3s ease-out";
-
-    // Initial fade-out after 1 second
     setTimeout(() => {
-        overlay.style.opacity = "0";
-    }, 1000); 
+        // Wait for the fade-in to fully complete before hiding the elements
+        fp_logo.style.opacity = "0"; // Hide splash screen
+        playButton.style.opacity = "0"; // Hide play button
+    }, 3000); // Delay until fade-in completes
 
-    // Fade back to black after 3.5 seconds
     setTimeout(() => {
-        overlay.style.opacity = "1";
-    }, 4500);
+        overlay.style.opacity = "0"; // Fade back out
+    }, 6000); // 3s after elements disappear
 
-    // Final fade-out after 8 seconds
     setTimeout(() => {
-        fp_logo.style.opacity = "0";
-        
-        // Delay zIndex update to ensure fade-out is visible
-        setTimeout(() => {
-            fp_logo.style.zIndex = "-4000";
-            overlay.style.opacity = "0";
-        }, 3000); // Wait for fade-out to finish before hiding
-
-        // Hide overlay properly after fade-out
-        setTimeout(() => {
-            overlay.style.zIndex = "-4000";
-        }, 6000);
-    }, 6100);
-
-    // Play button click event
-    playButton.addEventListener("click", function() {
-        overlay.style.opacity = "1"; // Fade back in over 3 seconds
-        overlay.style.zIndex = "9999"; // Ensure it's on top
-
-        setTimeout(() => {
-            fp_logo.style.opacity = "0"; // Hide splash screen
-            playButton.style.opacity = "0"; // Hide play button
-        }, 3000); // After fade-in completes
-
-        setTimeout(() => {
-            overlay.style.opacity = "0"; // Fade back out
-        }, 4000); // 1s after elements disappear
-
-        setTimeout(() => {
-            overlay.style.zIndex = "-4000"; // Move behind everything
-        }, 7000); // After fade-out is done
-    });
-};
-
+        overlay.style.zIndex = "-4000"; // Move behind everything
+    }, 9000); // After fade-out is done
+});
 
 const updateScore = (newScore) => {
     score = newScore;
