@@ -36,8 +36,8 @@ window.onload = function() {
         // Hide overlay properly after fade-out
         setTimeout(() => {
             overlay.style.zIndex = "-4000";
-        }, 6000);
-    }, 8000);
+        }, 5000);
+    }, 6000);
 };
 
 
