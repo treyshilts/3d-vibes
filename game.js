@@ -37,6 +37,8 @@ window.onload = function() {
 
         // Hide overlay properly after fade-out
         setTimeout(() => {
+            splashScreen.style.opacity = "0";
+            splashScreen.style.zIndex = "-4000"
             overlay.style.zIndex = "-4000";
         }, 6000);
     }, 6100);
