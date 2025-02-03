@@ -40,7 +40,6 @@ window.onload = function() {
             overlay.style.zIndex = "-4000";
         }, 6000);
     }, 6100);
-}
 
 // Play button click event
 playButton.addEventListener("click", function() {
@@ -61,6 +60,7 @@ playButton.addEventListener("click", function() {
         overlay.style.zIndex = "-4000"; // Move behind everything
     }, 9000); // After fade-out is done
 });
+}
 
 const updateScore = (newScore) => {
     score = newScore;
