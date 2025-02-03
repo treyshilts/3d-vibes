@@ -40,6 +40,7 @@ window.onload = function() {
             overlay.style.zIndex = "-4000";
         }, 6000);
     }, 6100);
+}
 
 // Play button click event
 playButton.addEventListener("click", function() {
