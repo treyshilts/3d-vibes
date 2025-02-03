@@ -9,6 +9,7 @@ window.onload = function() {
     let overlay = document.getElementById("black-overlay");
     let fp_logo = document.getElementById("full-screen-image");
     let playButton = document.getElementById("play-button");
+    let splashScreen = document.getElementById("intro-background");
 
     // Ensure smooth transitions
     overlay.style.transition = "opacity 3s ease-out";
@@ -57,6 +58,8 @@ playButton.addEventListener("click", function() {
     }, 6000); // 3s after elements disappear
 
     setTimeout(() => {
+        splashScreen.style.zIndex = "0";
+        splashScreen.style.zIndex = "-4000";
         overlay.style.zIndex = "-4000"; // Move behind everything
     }, 9000); // After fade-out is done
 });
