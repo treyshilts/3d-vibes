@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // scene.fog = new THREE.Fog(0xaaaaaa, 0.5, 30);
 
     // Add the sky sphere
-    const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/night.png');
+    const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/skybox.jpg');
     const skyGeometry = new THREE.SphereGeometry(400, 32, 32); // Increased size
     const skyMaterial = new THREE.MeshBasicMaterial({
       map: skyTexture,
