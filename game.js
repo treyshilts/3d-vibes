@@ -44,6 +44,7 @@ window.onload = function() {
 
 // Play button click event
 playButton.addEventListener("click", function() {
+    playButton.disabled = true;
     overlay.style.opacity = "1"; // Fade back in over 3 seconds
     overlay.style.zIndex = "9999"; // Ensure it's on top
 
