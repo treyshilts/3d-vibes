@@ -54,11 +54,11 @@ playButton.addEventListener("click", function() {
     }, 3000); // Delay until fade-in completes
 
     setTimeout(() => {
+        splashScreen.style.opacity = "0";
         overlay.style.opacity = "0"; // Fade back out
     }, 6000); // 3s after elements disappear
 
     setTimeout(() => {
-        splashScreen.style.zIndex = "0";
         splashScreen.style.zIndex = "-4000";
         overlay.style.zIndex = "-4000"; // Move behind everything
     }, 9000); // After fade-out is done
