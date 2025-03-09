@@ -150,6 +150,22 @@ const collidableNames = [
      ground.rotation.x = -Math.PI / 2;
      scene.add(ground);
 
+function placeGrassSprite(scene) {
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_bit.png', (texture) => {
+        const material = new THREE.SpriteMaterial({ map: texture });
+        const sprite = new THREE.Sprite(material);
+
+        // Random x position within -60 to 60 (since the grid is centered)
+        const x = (Math.random() * 120) - 60;
+        const y = 0;
+        const z = (Math.random() * 120) - 60; // Random z position
+
+        sprite.position.set(x, y, z);
+        scene.add(sprite);
+    });
+}
+    
 // Tree Positions
 const treePositions = [
     {
