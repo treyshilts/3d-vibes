@@ -156,12 +156,9 @@ function placeGrassSprite(scene) {
         const material = new THREE.SpriteMaterial({ map: texture });
         const sprite = new THREE.Sprite(material);
 
-        // Random x position within -60 to 60 (since the grid is centered)
-        const x = (Math.random() * 120) - 60;
-        const y = 0;
-        const z = (Math.random() * 120) - 60; // Random z position
+        // Set the fixed position
+        sprite.position.set(19.77, 0, 12.39); 
 
-        sprite.position.set(x, y, z);
         scene.add(sprite);
     });
 }
