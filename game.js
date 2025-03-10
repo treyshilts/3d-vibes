@@ -157,7 +157,7 @@ function placeGrassSprite(scene) {
         const sprite = new THREE.Sprite(material);
 
         // Set the fixed position
-        sprite.position.set(19.77, 0, 12.39); 
+        sprite.position.set(-1.17, 0, 5.83); 
 
         sprite.scale.set(100, 100, 1);
         
