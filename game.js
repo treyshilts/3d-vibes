@@ -152,13 +152,15 @@ const collidableNames = [
 
 function placeGrassSprite(scene) {
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_bit.png', (texture) => {
+    textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_1.png', (texture) => {
         const material = new THREE.SpriteMaterial({ map: texture });
         const sprite = new THREE.Sprite(material);
 
         // Set the fixed position
         sprite.position.set(19.77, 0, 12.39); 
 
+        sprite.scale.set(100, 100, 1);
+        
         scene.add(sprite);
     });
 }
