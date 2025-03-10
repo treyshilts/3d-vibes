@@ -152,17 +152,30 @@ const collidableNames = [
 
 function placeGrassSprite(scene) {
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_1.png', (texture) => {
-        const material = new THREE.SpriteMaterial({ map: texture });
-        const sprite = new THREE.Sprite(material);
+    textureLoader.load(
+        'https://treyshilts.github.io/3d-vibes/flowers_1.png',
+        (texture) => {
+            const material = new THREE.SpriteMaterial({
+                map: texture,
+                transparent: true, // Ensure transparency works
+            });
 
-        // Set the fixed position
-        sprite.position.set(-1.17, 0, 5.83); 
+            const sprite = new THREE.Sprite(material);
 
-        sprite.scale.set(100, 100, 1);
-        
-        scene.add(sprite);
-    });
+            // Adjust position slightly above ground to avoid clipping
+            sprite.position.set(-1.17, 1, 5.83); 
+
+            // Ensure scaling is noticeable
+            sprite.scale.set(100, 100, 1);
+
+            scene.add(sprite);
+
+            console.log("Sprite added:", sprite);
+            console.log("Scene children:", scene.children);
+        },
+        undefined,
+        (error) => console.error("Error loading texture:", error)
+    );
 }
     
 // Tree Positions
