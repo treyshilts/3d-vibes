@@ -205,7 +205,7 @@ scene.add(fireflies);
 
 // Firefly settings
 const numFireflies = 20;
-const fireflySize = 0.05;
+const fireflySize = 0.02;
 const spawnDistance = 10; // Max distance in front of the camera
 
 // Firefly material
@@ -1640,7 +1640,7 @@ const animate = () => {
     if (movingBackward) moveBackward();
     if (turningLeft) turnLeft();
     if (turningRight) turnRight();
-
+    
     if (stevey) {
         // Reset skeleton pose during each frame
         stevey.traverse((node) => {
@@ -1675,6 +1675,8 @@ if (stevey && redSphere) {
     if (mixer) mixer.update(0.016); // Ensure animations are updated
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
+
+    updateFireflies();
 };
 
 
