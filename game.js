@@ -205,7 +205,7 @@ const fireflies = new THREE.Group();
 scene.add(fireflies);
 
 // Firefly settings
-const numFireflies = 1000; // Increase number for full-map effect
+const numFireflies = 5000; // Increase number for full-map effect
 const fireflySize = 0.1; // Slightly bigger for visibility
 const spawnRange = 100; // Fireflies will spawn within a 50-unit cube
 
