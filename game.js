@@ -211,8 +211,6 @@ const flickerSpeeds = [
   0.55, 0.75, 1.25, 1.35
 ];
 
-let lastTime = performance.now();    
-
 // Firefly settings
 const numFireflies = 2000; // Increase number for full-map effect
 const fireflySize = 0.05; // Slightly bigger for visibility
