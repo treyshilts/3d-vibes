@@ -153,35 +153,56 @@ const collidableNames = [
 function placeGrassPlane(scene) {
     const textureLoader = new THREE.TextureLoader();
 
-    // Load the texture once and reuse it
-    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_1.png', () => {
-        console.log("Grass texture loaded successfully");
+    // Load the first texture
+    const grassTexture1 = textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_1.png', () => {
+        console.log("Grass texture 1 loaded successfully");
     }, undefined, (error) => {
-        console.error("Error loading grass texture:", error);
+        console.error("Error loading grass texture 1:", error);
     });
 
-    // Create the material once
-    const material = new THREE.MeshBasicMaterial({
-        map: grassTexture,
+    // Load the second texture
+    const grassTexture2 = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_bit.png', () => {
+        console.log("Grass texture 2 loaded successfully");
+    }, undefined, (error) => {
+        console.error("Error loading grass texture 2:", error);
+    });
+
+    // Create the material for the first plane
+    const material1 = new THREE.MeshBasicMaterial({
+        map: grassTexture1,
         transparent: true,
         side: THREE.DoubleSide,
         alphaTest: 0.5,
         depthWrite: false,
     });
 
-    // Create the geometry once
+    // Create the material for the second plane
+    const material2 = new THREE.MeshBasicMaterial({
+        map: grassTexture2,
+        transparent: true,
+        side: THREE.DoubleSide,
+        alphaTest: 0.5,
+        depthWrite: false,
+    });
+
+    // Create the geometry
     const geometry = new THREE.PlaneGeometry(1, 1);
-    const plane = new THREE.Mesh(geometry, material);
 
-    // Set position and scale
-    plane.position.set(0, 0.5, 4);
-    plane.scale.set(1, 1, 1);
+    // Create the first plane
+    const plane1 = new THREE.Mesh(geometry, material1);
+    plane1.position.set(0, 0.5, 4);
+    plane1.scale.set(1, 1, 1);
+    scene.add(plane1);
+    console.log("Grass plane 1 added at:", plane1.position);
 
-    // Add the plane to the scene
-    scene.add(plane);
-    console.log("Grass plane added at:", plane.position);
+    // Create the second plane
+    const plane2 = new THREE.Mesh(geometry, material2);
+    plane2.position.set(1, 0.5, 4);
+    plane2.scale.set(1, 1, 1);
+    scene.add(plane2);
+    console.log("Grass plane 2 added at:", plane2.position);
 }
-    
+
 // Tree Positions
 const treePositions = [
     {
