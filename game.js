@@ -174,7 +174,7 @@ function placeGrassPlane(scene) {
     const plane = new THREE.Mesh(geometry, material);
 
     // Set position and scale
-    plane.position.set(0, 0, 4);
+    plane.position.set(0, 0.5, 4);
     plane.scale.set(1, 1, 1);
 
     // Add the plane to the scene
