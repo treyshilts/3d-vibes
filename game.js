@@ -150,6 +150,107 @@ const collidableNames = [
      ground.rotation.x = -Math.PI / 2;
      scene.add(ground);
 
+    function placeGrassPlane(scene) {
+    const textureLoader = new THREE.TextureLoader();
+
+    // Load textures
+    const grassTexture1 = textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_1.png', () => {
+        console.log("Grass texture 1 loaded successfully");
+    }, undefined, (error) => {
+        console.error("Error loading grass texture 1:", error);
+    });
+
+    const grassTexture2 = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_bit.png', () => {
+        console.log("Grass texture 2 loaded successfully");
+    }, undefined, (error) => {
+        console.error("Error loading grass texture 2:", error);
+    });
+
+    const flowersTexture2 = textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_2.png', () => {
+        console.log("Flowers texture 2 loaded successfully");
+    }, undefined, (error) => {
+        console.error("Error loading flowers texture 2:", error);
+    });
+
+    const flowersTexture3 = textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_3.png', () => {
+        console.log("Flowers texture 3 loaded successfully");
+    }, undefined, (error) => {
+        console.error("Error loading flowers texture 3:", error);
+    });
+
+    // Create materials
+    const material1 = new THREE.MeshBasicMaterial({
+        map: grassTexture1,
+        transparent: true,
+        side: THREE.DoubleSide,
+        alphaTest: 0.5,
+        depthWrite: false,
+    });
+
+    const material2 = new THREE.MeshBasicMaterial({
+        map: grassTexture2,
+        transparent: true,
+        side: THREE.DoubleSide,
+        alphaTest: 0.5,
+        depthWrite: false,
+    });
+
+    const material3 = new THREE.MeshBasicMaterial({
+        map: flowersTexture2,
+        transparent: true,
+        side: THREE.DoubleSide,
+        alphaTest: 0.5,
+        depthWrite: false,
+    });
+
+    const material4 = new THREE.MeshBasicMaterial({
+        map: flowersTexture3,
+        transparent: true,
+        side: THREE.DoubleSide,
+        alphaTest: 0.5,
+        depthWrite: false,
+    });
+
+    const materials = [material1, material2, material3, material4];
+
+    // Create geometry
+    const geometry = new THREE.PlaneGeometry(1, 1);
+
+    /*// Create the first plane
+    const plane1 = new THREE.Mesh(geometry, material1);
+    plane1.position.set(0, 0.25, 4);
+    plane1.scale.set(0.5, 0.5, 0.5);
+    scene.add(plane1);
+    console.log("Grass plane 1 added at:", plane1.position);
+
+    // Create the second plane
+    const plane2 = new THREE.Mesh(geometry, material2);
+    plane2.position.set(1, 0.25, 4);
+    plane2.scale.set(0.5, 0.5, 0.5);
+    scene.add(plane2);
+    console.log("Grass plane 2 added at:", plane2.position); */
+
+    // Randomly distribute 3,000 planes within the bounding box
+    const minX = -45.67, maxX = 49.05;
+    const minZ = -40.36, maxZ = 57.06;
+    const numPlanes = 3000;
+
+    for (let i = 0; i < numPlanes; i++) {
+        const x = Math.random() * (maxX - minX) + minX;
+        const z = Math.random() * (maxZ - minZ) + minZ;
+
+        const material = materials[Math.floor(Math.random() * materials.length)];
+
+        const plane = new THREE.Mesh(geometry, material);
+        plane.position.set(x, 0.25, z);
+        plane.scale.set(0.5, 0.5, 0.5);
+        scene.add(plane);
+    }
+
+    console.log("Randomly placed 3,000 grass and flower planes.");
+}
+
+/*
 function placeGrassPlane(scene) {
     const textureLoader = new THREE.TextureLoader();
 
@@ -202,7 +303,7 @@ function placeGrassPlane(scene) {
     scene.add(plane2);
     console.log("Grass plane 2 added at:", plane2.position);
 }
-
+*/
 // Tree Positions
 const treePositions = [
     {
