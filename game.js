@@ -175,7 +175,7 @@ function placeGrassPlane(scene) {
 
     // Set position and scale
     plane.position.set(0, 0, 4);
-    plane.scale.set(2, 2, 1);
+    plane.scale.set(1, 1, 1);
 
     // Add the plane to the scene
     scene.add(plane);
