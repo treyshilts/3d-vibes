@@ -163,7 +163,7 @@ function placeGrassSprite(scene) {
             const sprite = new THREE.Sprite(material);
 
             // Adjust position slightly above ground to avoid clipping
-            sprite.position.set(-1.17, 1, 5.83); 
+            sprite.position.set(0, 1, 0); 
 
             // Ensure scaling is noticeable
             sprite.scale.set(100, 100, 1);
