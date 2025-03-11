@@ -155,7 +155,7 @@ function placeGrassPlane(scene) {
     textureLoader.load(
         'https://treyshilts.github.io/3d-vibes/flowers_1.png',
         (texture) => {
-            const geometry = new THREE.PlaneGeometry(1, 1); 
+            const geometry = new THREE.PlaneGeometry(0.25, 0.25); 
             const material = new THREE.MeshBasicMaterial({
                 map: texture,
                 transparent: true,
@@ -168,7 +168,7 @@ function placeGrassPlane(scene) {
 
             // Ensure it's in front of the camera
             plane.position.set(0, 1, 4); 
-            plane.scale.set(2, 2, 1); // Make it bigger
+            plane.scale.set(1, 1, 1); // Make it bigger
 
             scene.add(plane);
 
