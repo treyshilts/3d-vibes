@@ -261,12 +261,13 @@ function updateFireflies() {
 
 const maxDistance = 20; // Fireflies disappear beyond this distance
 
+const flickerSpeed = Math.PI / 0.5;
+    
 fireflies.children.forEach(firefly => {
-    /*const t = time * firefly.userData.flickerSpeed + firefly.userData.timeOffset;
-    firefly.material.opacity = 0.2 + 0.8 * Math.sin(t + Math.random() * Math.PI); // Independent flickering
+    const t = time * flickerSpeed + firefly.userData.timeOffset;
+    firefly.material.opacity = 0.2 + 0.8 * Math.sin(t); // 🔥 Smooth slow flickering
     firefly.position.y += 0.005 * Math.sin(t * 0.5); // Floating motion
-    */
-
+    
     // Check if firefly is too far from the camera
     if (firefly.position.distanceTo(camera.position) > maxDistance) {
         const newPos = camera.position.clone().add(getRandomPositionInSphere(maxDistance));
