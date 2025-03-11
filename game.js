@@ -1755,6 +1755,8 @@ function createRedSphere(x, y, z) {
       if (stevey) stevey.rotation.y -= rotationSpeed;
     };
 
+let lastTime = performance.now();
+    
     // Animation loop
 const animate = () => {
     if (movingForward) moveForward();
