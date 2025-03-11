@@ -222,7 +222,9 @@ function spawnFirefly() {
     firefly.position.set(position.x, position.y, position.z);
 
     // Unique flicker timing for each firefly
-    firefly.userData = { timeOffset: Math.random() * Math.PI * 2 };
+    firefly.userData = {
+        timeOffset: Math.random() * Math.PI * 2,
+        flickerSpeed: 2 + Math.random() * 3};
 
     fireflies.add(firefly);
 }
@@ -241,17 +243,37 @@ for (let i = 0; i < numFireflies; i++) {
     spawnFirefly();
 }
 
-/*
+function getRandomPositionInSphere(radius) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const r = Math.cbrt(Math.random()) * radius; // Uniformly distribute points
+
+    return new THREE.Vector3(
+        r * Math.sin(phi) * Math.cos(theta),
+        r * Math.sin(phi) * Math.sin(theta),
+        r * Math.cos(phi)
+    );
+}
+
 // Firefly update logic (Flickering independently + Floating Effect)
 function updateFireflies() {
     const time = performance.now() * 0.001;
 
-    fireflies.children.forEach(firefly => {
-        const t = time + firefly.userData.timeOffset;
-        firefly.material.opacity = 0.2 + 0.8 * Math.sin(t + Math.random() * Math.PI);
-        firefly.position.y += 0.005 * Math.sin(t); // Slight floating motion
-    });
-}*/
+const maxDistance = 50; // Fireflies disappear beyond this distance
+
+fireflies.children.forEach(firefly => {
+    const t = time * firefly.userData.flickerSpeed + firefly.userData.timeOffset;
+    firefly.material.opacity = 0.2 + 0.8 * Math.sin(t + Math.random() * Math.PI); // Independent flickering
+    firefly.position.y += 0.005 * Math.sin(t * 0.5); // Floating motion
+
+    // Check if firefly is too far from the camera
+    if (firefly.position.distanceTo(camera.position) > maxDistance) {
+        const newPos = camera.position.clone().add(getRandomPositionInSphere(maxDistance));
+        firefly.position.set(newPos.x, newPos.y, newPos.z);
+    }
+});
+
+}
 
 /*
 // Create firefly group
