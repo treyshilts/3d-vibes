@@ -205,6 +205,14 @@ function placeGrassPlane(scene) {
 const fireflies = new THREE.Group();
 scene.add(fireflies);
 
+const flickerSpeeds = [
+  0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 
+  1.1, 1.2, 1.3, 1.4, 1.5, 
+  0.55, 0.75, 1.25, 1.35
+];
+
+let lastTime = performance.now();    
+
 // Firefly settings
 const numFireflies = 2000; // Increase number for full-map effect
 const fireflySize = 0.05; // Slightly bigger for visibility
@@ -218,6 +226,7 @@ function seededRandom(seed) {
     return x - Math.floor(x); // Returns a number between 0 and 1
 }
 
+/*
 // Function to spawn a firefly anywhere in the map
 function spawnFirefly() {
     const geometry = new THREE.SphereGeometry(fireflySize, 8, 8);
@@ -233,6 +242,28 @@ function spawnFirefly() {
     phaseOffset: seededRandom(fireflies.children.length) * Math.PI * 2 // 🔥 Unique fade cycle start
     };
 
+    fireflies.add(firefly);
+}*/
+
+function spawnFirefly() {
+    const firefly = new THREE.Mesh(
+        new THREE.SphereGeometry(0.1, 8, 8),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1 })
+    );
+
+    // Randomly assign one of the predefined fade speeds
+    const randomIndex = Math.floor(Math.random() * flickerSpeeds.length);
+    firefly.userData = {
+        flickerSpeed: flickerSpeeds[randomIndex], // 🔥 Each firefly gets a unique fade speed
+        localTime: Math.random() * flickerSpeeds[randomIndex] // 🔥 Starts at a random phase
+    };
+
+    // Random position
+    firefly.position.set(
+        (Math.random() - 0.5) * 100, 
+        Math.random() * 25,  
+        (Math.random() - 0.5) * 100
+    );
 
     fireflies.add(firefly);
 }
@@ -271,18 +302,22 @@ const maxDistance = 20; // Fireflies disappear beyond this distance
 
 const flickerSpeed = Math.PI / 1;
 
-fireflies.children.forEach(firefly => {
-    const t = time + flickerSpeed + firefly.userData.phaseOffset;
-    firefly.material.opacity = 0.2 + 0.8 * Math.sin(t); // 🔥 Smooth slow flickering
-    firefly.position.y += 0.005 * Math.sin(t * 0.5); // Floating motion
-    
-    // Check if firefly is too far from the camera
-    if (firefly.position.distanceTo(camera.position) > maxDistance) {
-        const newPos = camera.position.clone().add(getRandomPositionInSphere(maxDistance));
-        firefly.position.set(newPos.x, newPos.y, newPos.z);
-    }
-});
+function updateFireflies(deltaTime) {
+    fireflies.children.forEach(firefly => {
+        // Update each firefly's local time independently
+        firefly.userData.localTime += deltaTime;
 
+        if (firefly.userData.localTime > firefly.userData.flickerSpeed) {
+            firefly.userData.localTime = 0; // Reset cycle when full fade-in/out is completed
+        }
+
+        // Calculate fade using sine wave (0 → 1 → 0)
+        const phase = firefly.userData.localTime / firefly.userData.flickerSpeed;
+        firefly.material.opacity = 0.2 + 0.8 * Math.sin(phase * Math.PI);
+
+        // Slight floating motion
+        firefly.position.y += 0.005 * Math.sin(phase * Math.PI);
+    });
 }
 
 /*
@@ -1763,6 +1798,9 @@ if (stevey && redSphere) {
     renderer.render(scene, camera);
 
     requestAnimationFrame(animate);
+    let currentTime = performance.now();
+    let deltaTime = (currentTime - lastTime) / 1000;
+    lastTime = currentTime;
     updateFireflies();
 };
 
