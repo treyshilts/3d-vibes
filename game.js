@@ -199,8 +199,6 @@ function placeGrassPlane(scene) {
     console.log("Randomly placed 3,000 grass and flower sprites.");
 }
 
-import * as THREE from 'three';
-
 // Create firefly group
 const fireflies = new THREE.Group();
 scene.add(fireflies);
