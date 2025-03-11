@@ -199,6 +199,7 @@ function placeGrassPlane(scene) {
     console.log("Randomly placed 3,000 grass and flower sprites.");
 }
 
+
 //firefly function#2
 // Create firefly group
 const fireflies = new THREE.Group();
@@ -212,6 +213,11 @@ const spawnRange = 100; // Fireflies will spawn within a 50-unit cube
 // Firefly material (WHITE instead of orange)
 const fireflyMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1 });
 
+function seededRandom(seed) {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x); // Returns a number between 0 and 1
+}
+
 // Function to spawn a firefly anywhere in the map
 function spawnFirefly() {
     const geometry = new THREE.SphereGeometry(fireflySize, 8, 8);
@@ -223,8 +229,10 @@ function spawnFirefly() {
 
     // Unique flicker timing for each firefly
     firefly.userData = { 
-    timeOffset: Math.random() * Math.PI * 2 // 🔥 Ensures every firefly starts at a different point
+    id: fireflies.children.length, // 🔥 Unique ID based on order of creation
+    phaseOffset: seededRandom(fireflies.children.length) * Math.PI * 2 // 🔥 Unique fade cycle start
     };
+
 
     fireflies.add(firefly);
 }
@@ -264,7 +272,7 @@ const maxDistance = 20; // Fireflies disappear beyond this distance
 const flickerSpeed = Math.PI / 1;
 
 fireflies.children.forEach(firefly => {
-    const t = (time + firefly.userData.timeOffset) * flickerSpeed;
+    const t = time + flickerSpeed + firefly.userData.phaseOffset;
     firefly.material.opacity = 0.2 + 0.8 * Math.sin(t); // 🔥 Smooth slow flickering
     firefly.position.y += 0.005 * Math.sin(t * 0.5); // Floating motion
     
