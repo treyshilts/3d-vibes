@@ -150,28 +150,31 @@ const collidableNames = [
      ground.rotation.x = -Math.PI / 2;
      scene.add(ground);
 
-function placeGrassSprite(scene) {
+function placeGrassPlane(scene) {
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load(
         'https://treyshilts.github.io/3d-vibes/flowers_1.png',
         (texture) => {
-            const material = new THREE.SpriteMaterial({
+            const geometry = new THREE.PlaneGeometry(1, 1); // 1x1 size
+            const material = new THREE.MeshBasicMaterial({
                 map: texture,
-                transparent: true, // Ensure transparency works
+                transparent: true,
+                side: THREE.DoubleSide, // Render on both sides
             });
 
-            const sprite = new THREE.Sprite(material);
+            const plane = new THREE.Mesh(geometry, material);
 
-            // Adjust position slightly above ground to avoid clipping
-            sprite.position.set(0, 1, 0); 
+            // Ensure it's standing upright (facing Z direction)
+            plane.rotation.y = 0; 
+            plane.rotation.x = 0; 
+            plane.rotation.z = 0; // No rotation needed
 
-            // Ensure scaling is noticeable
-            sprite.scale.set(100, 100, 1);
+            // Set position
+            plane.position.set(0, 1, -3);  
 
-            scene.add(sprite);
+            scene.add(plane);
 
-            console.log("Sprite added:", sprite);
-            console.log("Scene children:", scene.children);
+            console.log("Plane added:", plane);
         },
         undefined,
         (error) => console.error("Error loading texture:", error)
