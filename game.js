@@ -191,14 +191,14 @@ function placeGrassPlane(scene) {
     // Create the first plane
     const plane1 = new THREE.Mesh(geometry, material1);
     plane1.position.set(0, 0.5, 4);
-    plane1.scale.set(1, 1, 1);
+    plane1.scale.set(.5, .5, .5);
     scene.add(plane1);
     console.log("Grass plane 1 added at:", plane1.position);
 
     // Create the second plane
     const plane2 = new THREE.Mesh(geometry, material2);
     plane2.position.set(1, 0.5, 4);
-    plane2.scale.set(1, 1, 1);
+    plane2.scale.set(.5, .5, .5);
     scene.add(plane2);
     console.log("Grass plane 2 added at:", plane2.position);
 }
