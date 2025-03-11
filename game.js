@@ -150,7 +150,57 @@ const collidableNames = [
      ground.rotation.x = -Math.PI / 2;
      scene.add(ground);
 
-    function placeGrassPlane(scene) {
+function placeGrassPlane(scene) {
+    const textureLoader = new THREE.TextureLoader();
+
+    // Load textures for sprites
+    const textures = [
+        textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_1.png'),
+        textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_2.png'),
+        textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_3.png'),
+        textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_bit.png')
+    ];
+
+    // Create sprite materials
+    const materials = textures.map(texture => new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        alphaTest: 0.5,
+        depthWrite: false
+    }));
+
+    // Function to create and place a sprite
+    function createSprite(material, x, z) {
+        const sprite = new THREE.Sprite(material);
+        sprite.position.set(x, 0, z);
+        sprite.scale.set(1, 1, 1); // Adjust size if needed
+        scene.add(sprite);
+    }
+
+    // Initial two sprites at predefined positions
+    createSprite(materials[0], 0, 4);
+    createSprite(materials[3], 1, 4);
+
+    console.log("Placed initial two sprites.");
+
+    // Randomly distribute 3,000 sprites within the bounding box
+    const minX = -45.67, maxX = 49.05;
+    const minZ = -40.36, maxZ = 57.06;
+    const numSprites = 3000;
+
+    for (let i = 0; i < numSprites; i++) {
+        const x = Math.random() * (maxX - minX) + minX;
+        const z = Math.random() * (maxZ - minZ) + minZ;
+
+        const material = materials[Math.floor(Math.random() * materials.length)];
+        createSprite(material, x, z);
+    }
+
+    console.log("Randomly placed 3,000 grass and flower sprites.");
+}
+    
+// below is most recent functioning function    
+/*    function placeGrassPlane(scene) {
     const textureLoader = new THREE.TextureLoader();
 
     // Load textures
@@ -249,7 +299,7 @@ const collidableNames = [
 
     console.log("Randomly placed 3,000 grass and flower planes.");
 }
-
+*/
 /*
 function placeGrassPlane(scene) {
     const textureLoader = new THREE.TextureLoader();
