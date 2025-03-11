@@ -205,9 +205,9 @@ const fireflies = new THREE.Group();
 scene.add(fireflies);
 
 // Firefly settings
-const numFireflies = 50; // Increase number for full-map effect
+const numFireflies = 1000; // Increase number for full-map effect
 const fireflySize = 0.1; // Slightly bigger for visibility
-const spawnRange = 50; // Fireflies will spawn within a 50-unit cube
+const spawnRange = 100; // Fireflies will spawn within a 50-unit cube
 
 // Firefly material (WHITE instead of orange)
 const fireflyMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1 });
