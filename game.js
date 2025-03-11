@@ -205,8 +205,8 @@ const fireflies = new THREE.Group();
 scene.add(fireflies);
 
 // Firefly settings
-const numFireflies = 5000; // Increase number for full-map effect
-const fireflySize = 0.1; // Slightly bigger for visibility
+const numFireflies = 2000; // Increase number for full-map effect
+const fireflySize = 0.05; // Slightly bigger for visibility
 const spawnRange = 100; // Fireflies will spawn within a 50-unit cube
 
 // Firefly material (WHITE instead of orange)
@@ -222,9 +222,9 @@ function spawnFirefly() {
     firefly.position.set(position.x, position.y, position.z);
 
     // Unique flicker timing for each firefly
-    firefly.userData = {
-        timeOffset: Math.random() * Math.PI * 2,
-        flickerSpeed: 2 + Math.random() * 3};
+    firefly.userData = { 
+    timeOffset: Math.random() * Math.PI * 2 // 🔥 Ensures every firefly starts at a different point
+    };
 
     fireflies.add(firefly);
 }
@@ -261,10 +261,10 @@ function updateFireflies() {
 
 const maxDistance = 20; // Fireflies disappear beyond this distance
 
-const flickerSpeed = Math.PI / 0.5;
-    
+const flickerSpeed = Math.PI / 1;
+
 fireflies.children.forEach(firefly => {
-    const t = time * flickerSpeed + firefly.userData.timeOffset;
+    const t = (time + firefly.userData.timeOffset) * flickerSpeed;
     firefly.material.opacity = 0.2 + 0.8 * Math.sin(t); // 🔥 Smooth slow flickering
     firefly.position.y += 0.005 * Math.sin(t * 0.5); // Floating motion
     
