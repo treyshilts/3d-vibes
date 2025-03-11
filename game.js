@@ -4,6 +4,7 @@ let redSphere = null;
 let isWalking = false; // Tracks whether Stevey is currently walking  
 let deltaTime = 0;
 let score = 0; // Default score
+let lastTime = performance.now();
 
 window.onload = function() {
     let overlay = document.getElementById("black-overlay");
@@ -1752,8 +1753,6 @@ function createRedSphere(x, y, z) {
     const turnRight = () => {
       if (stevey) stevey.rotation.y -= rotationSpeed;
     };
-
-let lastTime = performance.now();
     
     // Animation loop
 const animate = () => {
