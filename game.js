@@ -295,13 +295,12 @@ function getRandomPositionInSphere(radius) {
 }
 
 // Firefly update logic (Flickering independently + Floating Effect)
-function updateFireflies() {
+/*function updateFireflies() {
     const time = performance.now() * 0.001;
 
+const flickerSpeed = Math.PI / 1;*/
+    
 const maxDistance = 20; // Fireflies disappear beyond this distance
-
-const flickerSpeed = Math.PI / 1;
-
 function updateFireflies(deltaTime) {
     fireflies.children.forEach(firefly => {
         // Update each firefly's local time independently
@@ -1801,7 +1800,7 @@ if (stevey && redSphere) {
     let currentTime = performance.now();
     let deltaTime = (currentTime - lastTime) / 1000;
     lastTime = currentTime;
-    updateFireflies();
+    updateFireflies(deltatime);
 };
 
 
