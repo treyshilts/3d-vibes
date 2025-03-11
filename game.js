@@ -247,7 +247,7 @@ function updateFireflies() {
 
     fireflies.children.forEach(firefly => {
         const t = time + firefly.userData.timeOffset;
-        firefly.material.opacity = 0.3 + 0.7 * Math.sin(t * 3); // Independent flickering
+        firefly.material.opacity = 0.2 + 0.8 * Math.sin(t + Math.random() * Math.PI);
         firefly.position.y += 0.005 * Math.sin(t); // Slight floating motion
     });
 }
