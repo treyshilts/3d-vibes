@@ -172,14 +172,14 @@ function placeGrassPlane(scene) {
     // Function to create and place a sprite
     function createSprite(material, x, z) {
         const sprite = new THREE.Sprite(material);
-        sprite.position.set(x, 0, z);
+        sprite.position.set(x, 0.25, z);
         sprite.scale.set(1, 1, 1); // Adjust size if needed
         scene.add(sprite);
     }
 
     // Initial two sprites at predefined positions
-    createSprite(materials[0], 0, 4);
-    createSprite(materials[3], 1, 4);
+    //createSprite(materials[0], 0, 4);
+    //createSprite(materials[3], 1, 4);
 
     console.log("Placed initial two sprites.");
 
