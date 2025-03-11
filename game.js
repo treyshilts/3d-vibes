@@ -266,7 +266,7 @@ function placeGrassPlane(scene) {
     // Create geometry
     const geometry = new THREE.PlaneGeometry(1, 1);
 
-    /*// Create the first plane
+    /* // Create the first plane
     const plane1 = new THREE.Mesh(geometry, material1);
     plane1.position.set(0, 0.25, 4);
     plane1.scale.set(0.5, 0.5, 0.5);
@@ -278,7 +278,7 @@ function placeGrassPlane(scene) {
     plane2.position.set(1, 0.25, 4);
     plane2.scale.set(0.5, 0.5, 0.5);
     scene.add(plane2);
-    console.log("Grass plane 2 added at:", plane2.position); */
+    console.log("Grass plane 2 added at:", plane2.position); */ /*
 
     // Randomly distribute 3,000 planes within the bounding box
     const minX = -45.67, maxX = 49.05;
@@ -298,9 +298,8 @@ function placeGrassPlane(scene) {
     }
 
     console.log("Randomly placed 3,000 grass and flower planes.");
-}
-*/
-/*
+} */
+/* 
 function placeGrassPlane(scene) {
     const textureLoader = new THREE.TextureLoader();
 
