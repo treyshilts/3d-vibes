@@ -152,31 +152,34 @@ const collidableNames = [
 
 function placeGrassPlane(scene) {
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load(
-        'https://treyshilts.github.io/3d-vibes/flowers_1.png',
-        (texture) => {
-            const geometry = new THREE.PlaneGeometry(0.5, 0.5); 
-            const material = new THREE.MeshBasicMaterial({
-                map: texture,
-                transparent: true,
-                side: THREE.DoubleSide,
-                alphaTest: 0.5,
-                depthWrite: false,
-            });
 
-            const plane = new THREE.Mesh(geometry, material);
+    // Load the texture once and reuse it
+    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/flowers_1.png', () => {
+        console.log("Grass texture loaded successfully");
+    }, undefined, (error) => {
+        console.error("Error loading grass texture:", error);
+    });
 
-            // Ensure it's in front of the camera
-            plane.position.set(0, 0, 4); 
-            plane.scale.set(1, 1, 1); // Make it bigger
+    // Create the material once
+    const material = new THREE.MeshBasicMaterial({
+        map: grassTexture,
+        transparent: true,
+        side: THREE.DoubleSide,
+        alphaTest: 0.5,
+        depthWrite: false,
+    });
 
-            scene.add(plane);
+    // Create the geometry once
+    const geometry = new THREE.PlaneGeometry(1, 1);
+    const plane = new THREE.Mesh(geometry, material);
 
-            console.log("Plane added at:", plane.position);
-        },
-        undefined,
-        (error) => console.error("Error loading texture:", error)
-    );
+    // Set position and scale
+    plane.position.set(0, 0, 4);
+    plane.scale.set(2, 2, 1);
+
+    // Add the plane to the scene
+    scene.add(plane);
+    console.log("Grass plane added at:", plane.position);
 }
     
 // Tree Positions
