@@ -167,7 +167,7 @@ function placeGrassPlane(scene) {
             const plane = new THREE.Mesh(geometry, material);
 
             // Ensure it's in front of the camera
-            plane.position.set(0, 1, -2); 
+            plane.position.set(0, 1, 4); 
             plane.scale.set(2, 2, 1); // Make it bigger
 
             scene.add(plane);
