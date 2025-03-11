@@ -198,6 +198,69 @@ function placeGrassPlane(scene) {
 
     console.log("Randomly placed 3,000 grass and flower sprites.");
 }
+
+import * as THREE from 'three';
+
+// Create firefly group
+const fireflies = new THREE.Group();
+scene.add(fireflies);
+
+// Firefly settings
+const numFireflies = 20;
+const fireflySize = 0.05;
+const spawnDistance = 10; // Max distance in front of the camera
+
+// Firefly material
+const fireflyMaterial = new THREE.MeshBasicMaterial({ color: 0xffcc00, transparent: true, opacity: 1 });
+
+// Function to spawn a firefly within camera view
+function spawnFirefly() {
+    const geometry = new THREE.SphereGeometry(fireflySize, 8, 8);
+    const firefly = new THREE.Mesh(geometry, fireflyMaterial);
+
+    // Place within camera frustum
+    const position = getRandomPositionInView();
+    firefly.position.set(position.x, position.y, position.z);
+    
+    // Add animation properties
+    firefly.userData = { timeOffset: Math.random() * Math.PI * 2 };
+
+    fireflies.add(firefly);
+}
+
+// Get a random position inside camera view
+function getRandomPositionInView() {
+    const frustumSize = 2; // Adjust for spread
+    const x = (Math.random() - 0.5) * frustumSize;
+    const y = (Math.random() - 0.5) * frustumSize;
+    const z = -Math.random() * spawnDistance; // Always in front of the camera
+
+    const position = new THREE.Vector3(x, y, z);
+    position.applyMatrix4(camera.matrixWorld);
+    
+    return position;
+}
+
+// Initialize fireflies
+for (let i = 0; i < numFireflies; i++) {
+    spawnFirefly();
+}
+
+function updateFireflies() {
+    const time = performance.now() * 0.001;
+
+    fireflies.children.forEach(firefly => {
+        const t = time + firefly.userData.timeOffset;
+        firefly.material.opacity = 0.5 + 0.5 * Math.sin(t * 2); // Flickering effect
+        firefly.position.y += 0.01 * Math.sin(t); // Slight floating movement
+        
+        // If firefly moves too far from camera, respawn it
+        if (firefly.position.distanceTo(camera.position) > spawnDistance) {
+            const newPos = getRandomPositionInView();
+            firefly.position.set(newPos.x, newPos.y, newPos.z);
+        }
+    });
+}
     
 // below is most recent functioning function    
 /*    function placeGrassPlane(scene) {
