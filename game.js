@@ -231,7 +231,7 @@ function spawnFirefly() {
 function getRandomPosition() {
     return new THREE.Vector3(
         (Math.random() - 0.5) * spawnRange, // Random X
-        Math.random() * spawnRange * 0.5,  // Random Y (keep them higher)
+        Math.random() * spawnRange * 0.25,  // Random Y (keep them higher)
         (Math.random() - 0.5) * spawnRange  // Random Z
     );
 }
@@ -241,6 +241,7 @@ for (let i = 0; i < numFireflies; i++) {
     spawnFirefly();
 }
 
+/*
 // Firefly update logic (Flickering independently + Floating Effect)
 function updateFireflies() {
     const time = performance.now() * 0.001;
@@ -250,7 +251,7 @@ function updateFireflies() {
         firefly.material.opacity = 0.2 + 0.8 * Math.sin(t + Math.random() * Math.PI);
         firefly.position.y += 0.005 * Math.sin(t); // Slight floating motion
     });
-}
+}*/
 
 /*
 // Create firefly group
