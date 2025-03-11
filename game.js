@@ -1799,7 +1799,7 @@ if (stevey && redSphere) {
     let currentTime = performance.now();
     let deltaTime = (currentTime - lastTime) / 1000;
     lastTime = currentTime;
-    updateFireflies(deltatime);
+    updateFireflies(deltaTime);
 };
 
 
