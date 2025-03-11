@@ -155,26 +155,24 @@ function placeGrassPlane(scene) {
     textureLoader.load(
         'https://treyshilts.github.io/3d-vibes/flowers_1.png',
         (texture) => {
-            const geometry = new THREE.PlaneGeometry(1, 1); // 1x1 size
+            const geometry = new THREE.PlaneGeometry(1, 1); 
             const material = new THREE.MeshBasicMaterial({
                 map: texture,
                 transparent: true,
-                side: THREE.DoubleSide, // Render on both sides
+                side: THREE.DoubleSide,
+                alphaTest: 0.5,
+                depthWrite: false,
             });
 
             const plane = new THREE.Mesh(geometry, material);
 
-            // Ensure it's standing upright (facing Z direction)
-            plane.rotation.y = 0; 
-            plane.rotation.x = 0; 
-            plane.rotation.z = 0; // No rotation needed
-
-            // Set position
-            plane.position.set(0, 1, -3);  
+            // Ensure it's in front of the camera
+            plane.position.set(0, 1, -2); 
+            plane.scale.set(2, 2, 1); // Make it bigger
 
             scene.add(plane);
 
-            console.log("Plane added:", plane);
+            console.log("Plane added at:", plane.position);
         },
         undefined,
         (error) => console.error("Error loading texture:", error)
@@ -1514,6 +1512,7 @@ document.addEventListener('keyup', (event) => {
 
 
 
+placeGrassPlane(scene);
 
 
     animate();
