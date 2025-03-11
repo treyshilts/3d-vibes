@@ -199,6 +199,60 @@ function placeGrassPlane(scene) {
     console.log("Randomly placed 3,000 grass and flower sprites.");
 }
 
+//firefly function#2
+// Create firefly group
+const fireflies = new THREE.Group();
+scene.add(fireflies);
+
+// Firefly settings
+const numFireflies = 50; // Increase number for full-map effect
+const fireflySize = 0.1; // Slightly bigger for visibility
+const spawnRange = 50; // Fireflies will spawn within a 50-unit cube
+
+// Firefly material (WHITE instead of orange)
+const fireflyMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1 });
+
+// Function to spawn a firefly anywhere in the map
+function spawnFirefly() {
+    const geometry = new THREE.SphereGeometry(fireflySize, 8, 8);
+    const firefly = new THREE.Mesh(geometry, fireflyMaterial);
+
+    // Position anywhere in the map
+    const position = getRandomPosition();
+    firefly.position.set(position.x, position.y, position.z);
+
+    // Unique flicker timing for each firefly
+    firefly.userData = { timeOffset: Math.random() * Math.PI * 2 };
+
+    fireflies.add(firefly);
+}
+
+// Get a random position anywhere in the map
+function getRandomPosition() {
+    return new THREE.Vector3(
+        (Math.random() - 0.5) * spawnRange, // Random X
+        Math.random() * spawnRange * 0.5,  // Random Y (keep them higher)
+        (Math.random() - 0.5) * spawnRange  // Random Z
+    );
+}
+
+// Initialize fireflies
+for (let i = 0; i < numFireflies; i++) {
+    spawnFirefly();
+}
+
+// Firefly update logic (Flickering independently + Floating Effect)
+function updateFireflies() {
+    const time = performance.now() * 0.001;
+
+    fireflies.children.forEach(firefly => {
+        const t = time + firefly.userData.timeOffset;
+        firefly.material.opacity = 0.3 + 0.7 * Math.sin(t * 3); // Independent flickering
+        firefly.position.y += 0.005 * Math.sin(t); // Slight floating motion
+    });
+}
+
+/*
 // Create firefly group
 const fireflies = new THREE.Group();
 scene.add(fireflies);
@@ -259,7 +313,7 @@ function updateFireflies() {
         }
     });
 }
-    
+*/    
 // below is most recent functioning function    
 /*    function placeGrassPlane(scene) {
     const textureLoader = new THREE.TextureLoader();
