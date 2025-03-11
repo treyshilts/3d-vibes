@@ -259,7 +259,7 @@ function getRandomPositionInSphere(radius) {
 function updateFireflies() {
     const time = performance.now() * 0.001;
 
-const maxDistance = 50; // Fireflies disappear beyond this distance
+const maxDistance = 20; // Fireflies disappear beyond this distance
 
 fireflies.children.forEach(firefly => {
     /*const t = time * firefly.userData.flickerSpeed + firefly.userData.timeOffset;
