@@ -2,7 +2,7 @@ let mixer = null;
 let walkAction = null;
 let redSphere = null;
 let isWalking = false; // Tracks whether Stevey is currently walking  
-
+let deltaTime = 0;
 let score = 0; // Default score
 
 window.onload = function() {
