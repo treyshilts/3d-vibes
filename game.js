@@ -1728,8 +1728,8 @@ if (stevey && redSphere) {
 }
     if (mixer) mixer.update(0.016); // Ensure animations are updated
     renderer.render(scene, camera);
-    requestAnimationFrame(animate);
 
+    requestAnimationFrame(animate);
     updateFireflies();
 };
 
