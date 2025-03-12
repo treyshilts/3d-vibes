@@ -215,7 +215,7 @@ const flickerSpeeds = [
 // Firefly settings
 const numFireflies = 2000; // Increase number for full-map effect
 const fireflySize = 0.05; // Slightly bigger for visibility
-const spawnRange = 100; // Fireflies will spawn within a 50-unit cube
+const spawnRange = 150; // Fireflies will spawn within a 50-unit cube
 
 // Firefly material (WHITE instead of orange)
 const fireflyMaterial = new THREE.MeshBasicMaterial({ color: 0xfeffbd, transparent: true, opacity: 1 });
