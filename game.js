@@ -315,6 +315,10 @@ function updateFireflies(deltaTime) {
 
         // Slight floating motion
         firefly.position.y += 0.005 * Math.sin(phase * Math.PI);
+
+        if (firefly.position.y > 20) {
+            firefly.position.y = 0; // Reset to ground level
+        }
     });
 }
 
