@@ -247,7 +247,7 @@ function spawnFirefly() {
 function spawnFirefly() {
     const firefly = new THREE.Mesh(
         new THREE.SphereGeometry(0.1, 8, 8),
-        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1 })
+        new THREE.MeshBasicMaterial({ color: 0xfcf295, transparent: true, opacity: 1 })
     );
 
     // Randomly assign one of the predefined fade speeds
