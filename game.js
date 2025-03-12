@@ -218,7 +218,7 @@ const fireflySize = 0.05; // Slightly bigger for visibility
 const spawnRange = 100; // Fireflies will spawn within a 50-unit cube
 
 // Firefly material (WHITE instead of orange)
-const fireflyMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 1 });
+const fireflyMaterial = new THREE.MeshBasicMaterial({ color: 0xfeffbd, transparent: true, opacity: 1 });
 
 function seededRandom(seed) {
     const x = Math.sin(seed) * 10000;
@@ -260,7 +260,7 @@ function spawnFirefly() {
     // Random position
     firefly.position.set(
         (Math.random() - 0.5) * 100, 
-        Math.random() * 25,  
+        Math.random() * 25 - 20,  
         (Math.random() - 0.5) * 100
     );
 
@@ -271,7 +271,7 @@ function spawnFirefly() {
 function getRandomPosition() {
     return new THREE.Vector3(
         (Math.random() - 0.5) * spawnRange, // Random X
-        Math.random() * spawnRange * 0.25,  // Random Y (keep them higher)
+        Math.random() * spawnRange * 0.25 - 20,  // Lower Y range
         (Math.random() - 0.5) * spawnRange  // Random Z
     );
 }
