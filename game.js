@@ -179,7 +179,8 @@ function placeGrassPlane(scene) {
     }
 
     const restrictedPolygons = [
-        [ // lake (waterfall)
+        // lake waterfall
+        [
             { x: -17.23, z: -24.01 },
             { x: -12.73, z: -16.74 },
             { x: -7.19, z: -16.20 },
@@ -191,7 +192,9 @@ function placeGrassPlane(scene) {
             { x: -15.76, z: -42.83 },
             { x: -17.80, z: -32.99 }
         ],
-        [ // bridge lake
+
+        // bridge lake
+        [
             { x: -46.29, z: 19.53 },
             { x: -46.19, z: 33.01 },
             { x: -17, z: 37.53 },
@@ -1933,11 +1936,6 @@ if (stevey && redSphere) {
     updateFireflies(deltaTime);
 };
 
-
-
-
-
-
 // Controls
 const setMovement = (type, value) => {
     if (type === 'forward') movingForward = value;
@@ -2007,4 +2005,4 @@ placeGrassPlane(scene);
 
 
     animate();
-  });
+  };
