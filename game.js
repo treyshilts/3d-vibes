@@ -1725,8 +1725,8 @@ function createRedSphere(x, y, z) {
 }
 
 const sphereCoordinates = [
-    { x: -2.73, y: 0, z: 7.97 },
-    { x: 3.15, y: 0, z: 5.94 }
+    { x: -2.73, y: 0.25, z: 7.97 },
+    { x: 3.15, y: 0.25, z: 5.94 }
 ];
 
 sphereCoordinates.forEach(coord => {
