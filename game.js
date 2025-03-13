@@ -1376,7 +1376,7 @@ const createTree = (x, z, scale = 1) => {
 };
 
 // Add Normal Trees
-treePositions.forEach(({ x, z }) => createTree(x, z, 1.5)); //medium
+treePositions.forEach(({ x, z }) => createTree(x, z, 1.5)); // medium
 
 // Add Bigger Trees (10% larger)
 biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.75)); // bigger
