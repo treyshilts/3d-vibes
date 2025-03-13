@@ -178,6 +178,46 @@ function placeGrassPlane(scene) {
         scene.add(sprite);
     }
 
+    const restrictedPolygons = [
+        [ // lake (waterfall)
+            { x: -17.23, z: -24.01 },
+            { x: -12.73, z: -16.74 },
+            { x: -7.19, z: -16.20 },
+            { x: -4.10, z: -20.67 },
+            { x: 4.37, z: -18.66 },
+            { x: 4.97, z: -31.17 },
+            { x: -0.64, z: -32.78 },
+            { x: -4.89, z: -42.31 },
+            { x: -15.76, z: -42.83 },
+            { x: -17.80, z: -32.99 }
+        ],
+        [ // bridge lake
+            { x: -46.29, z: 19.53 },
+            { x: -46.19, z: 33.01 },
+            { x: -17, z: 37.53 },
+            { x: -9.72, z: 32.49 },
+            { x: -9.67, z: 19.24 },
+            { x: -16.84, z: 15.50 }
+        ]
+    ];
+
+    function isPointInPolygon(point, polygon) {
+        let inside = false;
+        for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+            const xi = polygon[i].x, zi = polygon[i].z;
+            const xj = polygon[j].x, zj = polygon[j].z;
+
+            const intersect = ((zi > point.z) !== (zj > point.z)) &&
+                              (point.x < (xj - xi) * (point.z - zi) / (zj - zi) + xi);
+            if (intersect) inside = !inside;
+        }
+        return inside;
+    }
+
+    function isPointRestricted(x, z) {
+        return restrictedPolygons.some(polygon => isPointInPolygon({ x, z }, polygon));
+    }
+    
     // Initial two sprites at predefined positions
     //createSprite(materials[0], 0, 4);
     //createSprite(materials[3], 1, 4);
@@ -189,6 +229,22 @@ function placeGrassPlane(scene) {
     const minZ = -40.36, maxZ = 57.06;
     const numSprites = 3000;
 
+        let placedCount = 0;
+    while (placedCount < numSprites) {
+        const x = Math.random() * (maxX - minX) + minX;
+        const z = Math.random() * (maxZ - minZ) + minZ;
+
+        // Only place sprite if it's NOT in a restricted area
+        if (!isPointRestricted(x, z)) {
+            const material = materials[Math.floor(Math.random() * materials.length)];
+            createSprite(material, x, z);
+            placedCount++;
+        }
+    }
+
+    console.log(`Randomly placed ${placedCount} grass and flower sprites.`);
+
+/*
     for (let i = 0; i < numSprites; i++) {
         const x = Math.random() * (maxX - minX) + minX;
         const z = Math.random() * (maxZ - minZ) + minZ;
@@ -199,7 +255,7 @@ function placeGrassPlane(scene) {
 
     console.log("Randomly placed 3,000 grass and flower sprites.");
 }
-
+*/
 //firefly function#2
 // Create firefly group
 const fireflies = new THREE.Group();
