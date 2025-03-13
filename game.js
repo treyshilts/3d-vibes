@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // scene.fog = new THREE.Fog(0xaaaaaa, 0.5, 30);
 
-    // Add the sky sphere
+    // Add the sky 
     const skyTexture = new THREE.TextureLoader().load('https://treyshilts.github.io/3d-vibes/night.png');
     const skyGeometry = new THREE.SphereGeometry(400, 32, 32); // Increased size
     const skyMaterial = new THREE.MeshBasicMaterial({
@@ -1721,6 +1721,15 @@ function createRedSphere(x, y, z) {
     scene.add(redSphere);
 }
 
+const sphereCoordinates = [
+    { x: -2.73, y: 1, z: 7.97 },
+    { x: -3.15, y: 1, z: 5.94 }
+];
+
+sphereCoordinates.forEach(coord => {
+    createRedSphere(coord.x, coord.y, coord.z);
+});
+    
     // Movement
     let movingForward = false;
     let movingBackward = false;
