@@ -213,7 +213,7 @@ const flickerSpeeds = [
 ];
 
 // Firefly settings
-const numFireflies = 2000; // Increase number for full-map effect
+const numFireflies = 1000; // Increase number for full-map effect
 const fireflySize = 0.05; // Slightly bigger for visibility
 const spawnRange = 150; // Fireflies will spawn within a 50-unit cube
 
@@ -1427,7 +1427,7 @@ const loadMap = () => {
         texture.repeat.set(1, 1);
     });
 
-        const compDiscTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/CDtexture.png', (texture) => {
+        const compDiscTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/CDtexture2.png', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(1, 1);
@@ -1435,7 +1435,7 @@ const loadMap = () => {
 
 
     mapLoader.load(
-        'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_4.glb',
+        'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_5.glb',
         (gltf) => {
             const map = gltf.scene;
 
