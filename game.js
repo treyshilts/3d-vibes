@@ -1409,10 +1409,28 @@ const loadMap = () => {
         texture.center.set(0.5, 0.5);
     });
 
-        const bridgeTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bridge.', (texture) => {
+        const bridgeTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/bridge.png', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(10, 1);
+    });
+    
+        const keyboardTopTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/keyboardtexture.png', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(1, 1);
+    });
+    
+        const compScreenTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/comp_screen2.png', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(1, 1);
+    });
+
+        const compDiscTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/CDtexture.png', (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(1, 1);
     });
 
 
@@ -1439,24 +1457,37 @@ const loadMap = () => {
                         child.material = new THREE.MeshLambertMaterial({ map: bridgeTexture });
                     } else if (child.name.includes('shroomstem')) {
                         child.material = new THREE.MeshLambertMaterial({ color: 0xFBEEAC });
+                    } else if (child.name.includes('giant')) {
+                        child.material = new THREE.MeshLambertMaterial({ color: 0x000000 });
                     } else if (child.name.includes('shroomtop')) {
                         child.material = new THREE.MeshLambertMaterial({ color: 0x8B0000 });
                     } else if (child.name.includes('door')) {
                         child.material = new THREE.MeshLambertMaterial({ map: doorTexture });
                     } else if (child.name.includes('trunk')) {
                         child.material = new THREE.MeshLambertMaterial({ map: barkTexture });
-                    } else if (child.name.includes('house.roof')) {
+                    } else if (child.name.includes('houseroof')) {
                         child.material = new THREE.MeshLambertMaterial({ map: roofTexture });
                     } else if (child.name.includes('tinyroof')) {
                         child.material = new THREE.MeshLambertMaterial({ map: roofTexture });
-                    } else if (child.name.includes('house.front')) {
+                    } else if (child.name.includes('housefront')) {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
-                    } else if (child.name.includes('house.sides')) {
+                    } else if (child.name.includes('housesides')) {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
                     } else if (child.name.includes('tinyhouse')) {
                         child.material = new THREE.MeshLambertMaterial({ map: brickTexture });
                     } else if (child.name.includes('dirt')) {
                         child.material = new THREE.MeshLambertMaterial({ map: dirtTexture });
+                    } else if (child.name.includes('compkeytop')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: keyboardTopTexture });
+                    } else if (child.name.includes('compscreen')) {
+                        child.material = new THREE.MeshStandardMaterial({
+                            map: compScreenTexture,
+                            emissive: new THREE.Color(0xFFFFFF),
+                            emissiveIntensity: 1,
+                            emissiveMap: compScreenTexture,
+                        });
+                    } else if (child.name.includes('compdisc')) {
+                        child.material = new THREE.MeshLambertMaterial({ map: compDiscTexture });
                 }}
             });
     
