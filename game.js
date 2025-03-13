@@ -1376,16 +1376,16 @@ const createTree = (x, z, scale = 1) => {
 };
 
 // Add Normal Trees
-treePositions.forEach(({ x, z }) => createTree(x, z, 1.5)); // medium
+treePositions.forEach(({ x, z }) => createTree(x, z, 1.5));
 
 // Add Bigger Trees (10% larger)
-biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.75)); // bigger
+biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.75));
 
 // Add Smaller Trees (10% smaller)
-smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.3)); // smaller
+smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.3));
 
 // Add Largest Trees (30% larger)
-largestTreePositions.forEach(({ x, z }) => createTree(x, z, 2.0)); // biggest
+largestTreePositions.forEach(({ x, z }) => createTree(x, z, 2.0));
 
 // Create an HTML overlay for the text
 const coordinateDisplay = document.createElement('div');
