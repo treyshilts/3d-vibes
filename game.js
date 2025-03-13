@@ -1797,7 +1797,7 @@ sphereCoordinates.forEach(coord => {
     let movingBackward = false;
     let turningLeft = false;
     let turningRight = false;
-    const moveSpeed = 0.08;
+    const moveSpeed = 0.065;
     const rotationSpeed = 0.025;
 
     const detectCollision = (x, z) => {
