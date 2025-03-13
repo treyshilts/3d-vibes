@@ -602,7 +602,7 @@ function placeGrassPlane(scene) {
 }
 */
 //  Positions
-const Positions = [
+const treePositions = [
     {
         "x": -21.22,
         "z": 3.51
