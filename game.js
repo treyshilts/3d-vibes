@@ -1713,17 +1713,20 @@ gltf.animations.forEach((clip, index) => {
 // Call the function to load the Cadillac
 //loadCadillac();
     
+const redSpheres = [];
+    
 function createRedSphere(x, y, z) {
     const sphereGeometry = new THREE.SphereGeometry(0.3, 16, 16);
     const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 }); // Red color
     const redSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
     redSphere.position.set(x, y, z); // Set the sphere's position
     scene.add(redSphere);
+    redSpheres.push(redSphere);
 }
 
 const sphereCoordinates = [
-    { x: -2.73, y: 1, z: 7.97 },
-    { x: -3.15, y: 1, z: 5.94 }
+    { x: -2.73, y: 0, z: 7.97 },
+    { x: 3.15, y: 0, z: 5.94 }
 ];
 
 sphereCoordinates.forEach(coord => {
@@ -1827,7 +1830,29 @@ const animate = () => {
         const z = stevey.position.z.toFixed(2);
         document.getElementById("position").textContent = `(${x}, ${z})`;
     }
-// Collision detection between Stevey and the red sphere
+//New collision function
+function checkCollisions() {
+    for (let i = redSpheres.length - 1; i >= 0; i--) { // Iterate backward for safe removal
+        const redSphere = redSpheres[i];
+
+        if (stevey && redSphere) { 
+            const dx = stevey.position.x - redSphere.position.x;
+            const dz = stevey.position.z - redSphere.position.z;
+            const distance = Math.sqrt(dx * dx + dz * dz);
+            const collisionDistance = 0.5; // Adjust as needed
+
+            if (distance < collisionDistance) {
+                // Collision detected
+                scene.remove(redSphere); // Remove from scene
+                redSpheres.splice(i, 1); // Remove from array
+                updateScore(score + 1000); // Increase score
+            }
+        }
+    }
+}
+    
+// Collision detection between Stevey and the red sphere (old function)
+/*
 if (stevey && redSphere) {
     const dx = stevey.position.x - redSphere.position.x;
     const dz = stevey.position.z - redSphere.position.z;
@@ -1840,6 +1865,7 @@ if (stevey && redSphere) {
         updateScore(score + 1000); // Increase score by 1000
     }
 }
+*/
     if (mixer) mixer.update(0.016); // Ensure animations are updated
     renderer.render(scene, camera);
 
@@ -1847,6 +1873,7 @@ if (stevey && redSphere) {
     let currentTime = performance.now();
     let deltaTime = (currentTime - lastTime) / 1000;
     lastTime = currentTime;
+    checkCollisions();
     updateFireflies(deltaTime);
 };
 
