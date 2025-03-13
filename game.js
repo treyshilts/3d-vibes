@@ -601,8 +601,8 @@ function placeGrassPlane(scene) {
     console.log("Grass plane 2 added at:", plane2.position);
 }
 */
-// Tree Positions
-const treePositions = [
+//  Positions
+const Positions = [
     {
         "x": -21.22,
         "z": 3.51
@@ -1376,16 +1376,16 @@ const createTree = (x, z, scale = 1) => {
 };
 
 // Add Normal Trees
-treePositions.forEach(({ x, z }) => createTree(x, z, 2.5)); //medium
+treePositions.forEach(({ x, z }) => createTree(x, z, 1.5)); //medium
 
 // Add Bigger Trees (10% larger)
-biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 2.75)); // bigger
+biggerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.75)); // bigger
 
 // Add Smaller Trees (10% smaller)
-smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 2.3)); // smaller
+smallerTreePositions.forEach(({ x, z }) => createTree(x, z, 1.3)); // smaller
 
 // Add Largest Trees (30% larger)
-largestTreePositions.forEach(({ x, z }) => createTree(x, z, 3.0)); // biggest
+largestTreePositions.forEach(({ x, z }) => createTree(x, z, 2.0)); // biggest
 
 // Create an HTML overlay for the text
 const coordinateDisplay = document.createElement('div');
