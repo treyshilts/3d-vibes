@@ -1427,7 +1427,7 @@ const loadMap = () => {
         texture.repeat.set(1, 1);
     });
 
-        const compDiscTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/CDtexture2.png', (texture) => {
+        const compDiscTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/CDtexture3.png', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(1, 1);
