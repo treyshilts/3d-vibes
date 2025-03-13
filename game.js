@@ -200,7 +200,6 @@ function placeGrassPlane(scene) {
     console.log("Randomly placed 3,000 grass and flower sprites.");
 }
 
-
 //firefly function#2
 // Create firefly group
 const fireflies = new THREE.Group();
@@ -1753,7 +1752,7 @@ function createRedSphere(x, y, z) {
       });
     
       // Return true if collision detected with any object or trunk
-      return collidesWithObjects || collidesWithTrunks;
+      return collidesWithTrunks;
     };
 
 
