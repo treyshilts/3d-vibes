@@ -1415,7 +1415,7 @@ const loadMap = () => {
         texture.repeat.set(10, 1);
     });
     
-        const keyboardTopTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/keyboardtexture2.png', (texture) => {
+        const keyboardTopTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/keyboardtexture3.png', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(1, 1);
