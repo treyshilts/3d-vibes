@@ -246,7 +246,7 @@ function placeGrassPlane(scene) {
     }
 
     console.log(`Randomly placed ${placedCount} grass and flower sprites.`);
-
+}
 /*
     for (let i = 0; i < numSprites; i++) {
         const x = Math.random() * (maxX - minX) + minX;
@@ -2005,4 +2005,4 @@ placeGrassPlane(scene);
 
 
     animate();
-  };
+  });
