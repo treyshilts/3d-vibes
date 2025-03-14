@@ -1826,7 +1826,100 @@ sphereCoordinates.forEach(coord => {
       return collidesWithTrunks;
     };
 
+// Define wall polygons (each wall is a set of { x, z } points)
+const wallPolygons = [
+    [ // Wall 1
+        { x: 4.26, z: 5.90 },
+        { x: 7.45, z: 3.97 },
+        { x: 13.77, z: 1.07 },
+        { x: 6.75, z: 30.12 },
+        { x: -10.08, z: 32.67 },
+        { x: -9.69, z: 19.21 },
+        { x: -10.35, z: 16.45 },
+        { x: -14.93, z: 11.75 },
+        { x: -27.81, z: 11.19 },
+        { x: -28.48, z: 2.81 },
+        { x: -10.56, z: -2.45 },
+        { x: -8.34, z: 5.91 },
+        { x: -4.79, z: 14.45 },
+        { x: 0.32, z: 16.33 }
+    ],
+    [ // Wall 2
+        { x: -0.03, z: 3.01 },
+        { x: -3.78, z: 4.89 },
+        { x: -6.02, z: -3.73 },
+        { x: -4.75, z: -7.58 },
+        { x: -14.18, z: -11.33 },
+        { x: -18.75, z: -17.83 },
+        { x: -17.33, z: -23.75 },
+        { x: -12.00, z: -18.67 },
+        { x: -7.10, z: -16.59 },
+        { x: -4.63, z: -21.81 },
+        { x: 4.40, z: -21.56 },
+        { x: 4.91, z: -16.57 },
+        { x: 9.46, z: -18.18 },
+        { x: 16.64, z: -25.18 },
+        { x: 18.84, z: -35.50 },
+        { x: 8.81, z: -36.01 },
+        { x: 5.29, z: -35.11 },
+        { x: 4.37, z: -29.70 },
+        { x: -4.72, z: -30.22 },
+        { x: -5.44, z: -41.73 },
+        { x: -33.10, z: -41.87 },
+        { x: -32.69, z: 11.70 },
+        { x: -34.62, z: 19.27 },
+        { x: -18.95, z: 32.73 },
+        { x: -46.06, z: 33.06 },
+        { x: -45.67, z: 53.11 },
+        { x: 12.99, z: 55.15 },
+        { x: 21.33, z: 51.47 },
+        { x: 35.69, z: 50.85 },
+        { x: 38.28, z: 38.99 },
+        { x: 49.51, z: 37.67 },
+        { x: 49.47, z: 8.14 },
+        { x: 44.24, z: 4.17 },
+        { x: 45.33, z: -2.06 },
+        { x: 47.59, z: -8.92 },
+        { x: 49.62, z: -20.71 },
+        { x: 49.88, z: 42.00 },
+        { x: 36.89, z: -41.92 },
+        { x: 26.20, z: -35.18 },
+        { x: 26.37, z: -21.48 },
+        { x: 17.83, z: -11.50 },
+        { x: 9.95, z: -5.73 },
+        { x: 5.28, z: -5.16 },
+        { x: 4.04, z: -1.33 }
+    ],
+    [ // Wall 3
+        { x: -14.77, z: 18.89 },
+        { x: -9.84, z: 19.07 },
+        { x: -9.64, z: 32.61 },
+        { x: -14.70, z: 32.76 }
+    ]
+];
 
+// Ray-casting algorithm to check if a point is inside a polygon
+function isPointInPolygon(point, polygon) {
+    let inside = false;
+    for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        const { x: xi, z: zi } = polygon[i];
+        const { x: xj, z: zj } = polygon[j];
+
+        if ((zi > point.z) !== (zj > point.z) &&
+            point.x < ((xj - xi) * (point.z - zi) / (zj - zi) + xi)) {
+            inside = !inside;
+        }
+    }
+    return inside;
+}
+
+// Updated detectWallCollision function
+const detectWallCollision = (x, z) => {
+    return wallPolygons.some(polygon => isPointInPolygon({ x, z }, polygon));
+};
+
+    
+/*
     const detectWallCollision = (x, z) => {
       return walls.some(wall => {
         const dx = x - wall.position.x;
@@ -1835,7 +1928,7 @@ sphereCoordinates.forEach(coord => {
         return distance < 0.9; // Collision radius for walls
       });
     };
-
+*/
     const moveForward = () => {
       if (!stevey) return;
       const nextX = stevey.position.x + Math.sin(stevey.rotation.y) * moveSpeed;
