@@ -141,7 +141,7 @@ const collidableNames = [
     // Ground
      const groundGeometry = new THREE.PlaneGeometry(0, 0);
      const textureLoader = new THREE.TextureLoader();
-     const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png');
+     const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
      grassTexture.wrapS = THREE.RepeatWrapping;
      grassTexture.wrapT = THREE.RepeatWrapping;
      grassTexture.repeat.set(4, 4);
@@ -1409,59 +1409,18 @@ function updatePosition() {
         document.getElementById("position").textContent = `(${x}, ${z})`;
     }
 }
-
-// temp - just put in for austins bug potential fix. lets hope it doesnt break...
-const loadMapWithGrassTexture = (grassTexture) => {
-    const mapLoader = new THREE.GLTFLoader();
-
-    mapLoader.load(
-        'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_5.glb',
-        (gltf) => {
-            const map = gltf.scene;
-
-            map.traverse((child) => {
-                if (child.isMesh) {
-                    if (child.name.includes('mainground')) {
-                        child.material = new THREE.MeshLambertMaterial({ map: grassTexture });
-                    }
-                }
-            });
-
-            map.position.set(0, 0, 0);
-            map.scale.set(7, 7, 7);
-            scene.add(map);
-        },
-        undefined,
-        (error) => {
-            console.error('Error loading map:', error);
-        }
-    );
-};
-
     
 // Load the map
 const loadMap = () => {
     const mapLoader = new THREE.GLTFLoader();
     const textureLoader = new THREE.TextureLoader();
-
-    textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png', (texture) => {
-        texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(30, 30);
-
-    // After texture is ready, load the map
-    loadMapWithGrassTexture(texture);
-});
-
     
-    /* trying to fix austin's problem ^^
-    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png', (texture) => {
+    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(30, 30);
     });
-    */
-    
+
     const waterTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/water.png', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
@@ -1636,8 +1595,8 @@ const createTexturedCube = (x, y, z) => {
   const materials = [
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') }), // Front
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') }), // Back
-    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png') }),      // Top
-    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png') }),      // Bottom
+    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg') }),      // Top
+    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg') }),      // Bottom
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') }), // Left
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') })  // Right
   ];
@@ -1692,7 +1651,7 @@ const createDiagonalRamp = (x, y, z) => {
 
   // Load textures
   const sideTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp');
-  const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png');
+  const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
 
   // Create materials
   const materials = [
