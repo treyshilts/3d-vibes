@@ -141,7 +141,7 @@ const collidableNames = [
     // Ground
      const groundGeometry = new THREE.PlaneGeometry(0, 0);
      const textureLoader = new THREE.TextureLoader();
-     const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
+     const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png');
      grassTexture.wrapS = THREE.RepeatWrapping;
      grassTexture.wrapT = THREE.RepeatWrapping;
      grassTexture.repeat.set(4, 4);
@@ -1444,7 +1444,7 @@ const loadMap = () => {
     const mapLoader = new THREE.GLTFLoader();
     const textureLoader = new THREE.TextureLoader();
 
-    textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg', (texture) => {
+    textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(30, 30);
@@ -1455,7 +1455,7 @@ const loadMap = () => {
 
     
     /* trying to fix austin's problem ^^
-    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg', (texture) => {
+    const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png', (texture) => {
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(30, 30);
@@ -1636,8 +1636,8 @@ const createTexturedCube = (x, y, z) => {
   const materials = [
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') }), // Front
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') }), // Back
-    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg') }),      // Top
-    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg') }),      // Bottom
+    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png') }),      // Top
+    new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png') }),      // Bottom
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') }), // Left
     new THREE.MeshLambertMaterial({ map: textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp') })  // Right
   ];
@@ -1692,7 +1692,7 @@ const createDiagonalRamp = (x, y, z) => {
 
   // Load textures
   const sideTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/467E67FD_c.bmp');
-  const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass.jpg');
+  const grassTexture = textureLoader.load('https://treyshilts.github.io/3d-vibes/grass_3d.png');
 
   // Create materials
   const materials = [
