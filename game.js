@@ -107,6 +107,12 @@ canvas.style.imageRendering = 'pixelated';
 canvas.style.imageRendering = '-moz-crisp-edges'; // Firefox
 canvas.style.imageRendering = 'crisp-edges'; // Other browsers
 
+// for WALLDEBUGGING
+wallPolygons.forEach(polygon => {
+    const wallMesh = createWallMesh(polygon);
+    scene.add(wallMesh);
+});
+
 // collision w/ objects in glb
 const collidableNames = [
   'house.front',
@@ -1898,6 +1904,14 @@ const wallPolygons = [
     ]
 ];
 
+//adding this for WALLDEBUGGING
+const wallMaterial = new THREE.MeshBasicMaterial({
+    color: 0xff0000,
+    transparent: true,
+    opacity: 0.5,
+    side: THREE.DoubleSide
+});
+    
 // Ray-casting algorithm to check if a point is inside a polygon
 function isPointInPolygon(point, polygon) {
     let inside = false;
@@ -1917,6 +1931,31 @@ function isPointInPolygon(point, polygon) {
 const detectWallCollision = (x, z) => {
     return wallPolygons.some(polygon => isPointInPolygon({ x, z }, polygon));
 };
+
+//for WALLDEBUGGING
+function createWallMesh(polygon) {
+    const shape = new THREE.Shape();
+    shape.moveTo(polygon[0].x, polygon[0].z);
+    for (let i = 1; i < polygon.length; i++) {
+        shape.lineTo(polygon[i].x, polygon[i].z);
+    }
+    shape.lineTo(polygon[0].x, polygon[0].z); // Close the shape
+
+    const extrudeSettings = {
+        steps: 1,
+        depth: 3, // Height of the wall
+        bevelEnabled: false
+    };
+
+    const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    const mesh = new THREE.Mesh(geometry, wallMaterial);
+
+    // Rotate to XZ plane and lift above ground
+    mesh.rotation.x = -Math.PI / 2;
+    mesh.position.y = 0; // Adjust if needed
+
+    return mesh;
+}
 
     
 /*
