@@ -1994,7 +1994,10 @@ function createWallMesh(polygon) {
 
         scene.add(mesh); // Add mesh to scene first to finalize transforms
 
-        const box = new THREE.Box3().setFromObject(mesh);
+        mesh.geometry.computeBoundingBox(); // Ensure bounding box exists
+        const box = mesh.geometry.boundingBox.clone();
+        box.applyMatrix4(mesh.matrixWorld); // Apply transforms
+        
         const helper = new THREE.Box3Helper(box, 0xffff00);
         scene.add(helper);
     }
