@@ -2006,10 +2006,19 @@ function createWallMesh(polygon) {
         collisionMeshes.push(collisionMesh);
         scene.add(collisionMesh);
 
+        /*
         mesh.updateMatrixWorld(true); // Force-update transform
         mesh.geometry.computeBoundingBox(); // Ensure bounding box exists
         const box = mesh.geometry.boundingBox.clone();
         box.applyMatrix4(mesh.matrixWorld); // Apply transforms
+        const helper = new THREE.Box3Helper(box, 0xffff00);
+        scene.add(helper);
+        */
+
+        collisionMesh.updateMatrixWorld(true);
+        collisionMesh.geometry.computeBoundingBox();
+        const box = collisionMesh.geometry.boundingBox.clone();
+        box.applyMatrix4(collisionMesh.matrixWorld);
         const helper = new THREE.Box3Helper(box, 0xffff00);
         scene.add(helper);
     }
