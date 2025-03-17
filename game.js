@@ -144,6 +144,11 @@ const collidableNames = [
         side: THREE.DoubleSide
     });
 
+    const collisionMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffff00,
+        wireframe: true
+    });
+    
     function createWallMesh(polygon) {
     const wallHeight = 3;
     const wallThickness = 0.1;
@@ -197,11 +202,6 @@ const collidableNames = [
     
     wallPolygons.forEach(polygon => {
         createWallMesh(polygon);
-    });
-        
-    const collisionMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffff00,
-        wireframe: true
     });
     
     const collidables = [];
