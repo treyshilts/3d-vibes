@@ -1990,6 +1990,9 @@ function createWallMesh(polygon) {
 
         group.add(mesh);
         wallMeshes.push(mesh); // Store for collision
+
+        const helper = new THREE.Box3Helper(new THREE.Box3().setFromObject(mesh), 0xffff00);
+        scene.add(helper);
     }
 
     return group;
