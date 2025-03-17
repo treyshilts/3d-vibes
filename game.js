@@ -137,6 +137,73 @@ const collidableNames = [
     
     const collisionMeshes = []; // Accurate hitboxes
 
+    const wallMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff0000,
+        transparent: true,
+        opacity: 0.5,
+        side: THREE.DoubleSide
+    });
+
+    function createWallMesh(polygon) {
+    const wallHeight = 3;
+    const wallThickness = 0.1;
+    const segmentLength = 0.125;
+
+    for (let i = 0; i < polygon.length; i++) {
+        const start = polygon[i];
+        const end = polygon[(i + 1) % polygon.length];
+
+        const dx = end.x - start.x;
+        const dz = end.z - start.z;
+        const fullLength = Math.sqrt(dx * dx + dz * dz);
+        const angle = Math.atan2(dz, dx);
+
+        const redGeometry = new THREE.BoxGeometry(fullLength, wallHeight, wallThickness);
+        const redMesh = new THREE.Mesh(redGeometry, wallMaterial);
+        const midX = (start.x + end.x) / 2;
+        const midZ = (start.z + end.z) / 2;
+        redMesh.position.set(midX, wallHeight / 2, midZ);
+        redMesh.rotation.y = -angle;
+        scene.add(redMesh);
+
+        const numSegments = Math.ceil(fullLength / segmentLength);
+            for (let j = 0; j < numSegments; j++) {
+                const ratio = j / numSegments;
+                const segX = start.x + dx * ratio;
+                const segZ = start.z + dz * ratio;
+    
+                const collGeom = new THREE.BoxGeometry(segmentLength, wallHeight, wallThickness);
+                const collMesh = new THREE.Mesh(collGeom, collisionMaterial);
+                collMesh.position.set(segX, wallHeight / 2, segZ);
+                collMesh.rotation.y = -angle;
+    
+                scene.add(collMesh);
+                collisionMeshes.push(collMesh);
+            }
+        }
+    }
+    
+    const detectWallCollision = (x, z) => {
+        const point = new THREE.Vector3(x, 1.5, z);
+    
+        return collisionMeshes.some(mesh => {
+            mesh.geometry.computeBoundingBox();
+            const box = mesh.geometry.boundingBox.clone();
+            mesh.updateMatrixWorld(true);
+            box.applyMatrix4(mesh.matrixWorld);
+            return box.containsPoint(point);
+        });
+    };
+    
+    wallPolygons.forEach(polygon => {
+        createWallMesh(polygon);
+    });
+        
+    const collisionMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffff00,
+        wireframe: true
+    });
+    
     const collidables = [];
 
     // Light
@@ -1942,6 +2009,7 @@ function isPointInPolygon(point, polygon) {
     return inside;
 }
 
+    /*
 const detectWallCollision = (x, z) => {
     const point = new THREE.Vector3(x, 1.5, z);
 
@@ -1953,10 +2021,11 @@ const detectWallCollision = (x, z) => {
         return box.containsPoint(point);
     });
 };
-
+*/
     
 // Updated detectWallCollision function
-/*const detectWallCollision = (x, z) => {
+/*
+const detectWallCollision = (x, z) => {
     const point = new THREE.Vector3(x, 1.5, z); // Assume Stevey’s height ~1.5
 
     return wallMeshes.some(mesh => {
@@ -1965,7 +2034,7 @@ const detectWallCollision = (x, z) => {
     });
 };
 */
-
+/*
 function createWallMesh(polygon) {
     const group = new THREE.Group(); // To group all wall segments for this polygon
 
@@ -2037,6 +2106,7 @@ function createWallMesh(polygon) {
         const helper = new THREE.Box3Helper(box, 0xffff00);
         scene.add(helper);
         */
+    /*
     }
 
     return group;
@@ -2045,7 +2115,7 @@ function createWallMesh(polygon) {
 wallPolygons.forEach(polygon => {
     createWallMesh(polygon); // ✅ Just call it, don’t add returned group
 });
-
+*/
 /*
     const detectWallCollision = (x, z) => {
       return walls.some(wall => {
@@ -2056,6 +2126,8 @@ wallPolygons.forEach(polygon => {
       });
     };
 */
+
+
     const moveForward = () => {
       if (!stevey) return;
       const nextX = stevey.position.x + Math.sin(stevey.rotation.y) * moveSpeed;
