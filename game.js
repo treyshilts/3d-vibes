@@ -68,7 +68,7 @@ playButton.addEventListener("click", function() {
 });
 }
 
-const audio = new Audio('FP_game_score.mp3');
+const audio = new Audio('https://treyshilts.github.io/3d-vibes/FP_game_score.mp3');
 audio.loop = true;  // loops indefinitely
 audio.volume = 0.4; // set desired volume (0-1)
 audio.play();
