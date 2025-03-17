@@ -1940,8 +1940,12 @@ function isPointInPolygon(point, polygon) {
 
 // Updated detectWallCollision function
 const detectWallCollision = (x, z) => {
-    //return false
-    return wallPolygons.some(polygon => isPointInPolygon({ x, z }, polygon));
+    const point = new THREE.Vector3(x, 1.5, z); // Assume Stevey’s height ~1.5
+
+    return wallMeshes.some(mesh => {
+        const box = new THREE.Box3().setFromObject(mesh);
+        return box.containsPoint(point);
+    });
 };
 
 function createWallMesh(polygon) {
