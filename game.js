@@ -1985,7 +1985,7 @@ const wallPolygons = [
         { x: -18.82, z: 19.29 }
     ]
 ];
-
+/*
 //adding this for WALLDEBUGGING
 const wallMaterial = new THREE.MeshBasicMaterial({
     color: 0xff0000,
@@ -1993,7 +1993,7 @@ const wallMaterial = new THREE.MeshBasicMaterial({
     opacity: 0.5,
     side: THREE.DoubleSide
 });
-    
+*/
 // Ray-casting algorithm to check if a point is inside a polygon
 function isPointInPolygon(point, polygon) {
     let inside = false;
