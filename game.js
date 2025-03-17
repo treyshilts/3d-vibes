@@ -133,6 +133,8 @@ const collidableNames = [
   'trunk1',
 ];
 
+    const collisionData = []; // Manual collision data
+    
     const collisionMeshes = []; // Accurate hitboxes
 
     const collidables = [];
@@ -1941,14 +1943,11 @@ function isPointInPolygon(point, polygon) {
 }
 
 const detectWallCollision = (x, z) => {
-    const point = new THREE.Vector3(x, 1.5, z);
+    const point = new THREE.Vector3(x, 1.5, z); // Stevey's position
 
     return collisionMeshes.some(mesh => {
-        mesh.updateMatrixWorld(true);
-        mesh.geometry.computeBoundingBox();
-        const box = mesh.geometry.boundingBox.clone();
-        box.applyMatrix4(mesh.matrixWorld);
-        box.expandByScalar(-0.05);
+        mesh.updateMatrixWorld(true); // Force apply position + rotation
+        const box = new THREE.Box3().setFromObject(mesh);
         return box.containsPoint(point);
     });
 };
@@ -1993,8 +1992,20 @@ function createWallMesh(polygon) {
         group.add(mesh);
         wallMeshes.push(mesh); // Store for collision
 
-        scene.add(mesh); // Add mesh to scene first to finalize transforms
+        scene.add(mesh); // Add red wall to scene
 
+        // Create collision wall mesh (yellow for debug)
+        const collisionMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00, wireframe: true });
+        const collisionMesh = new THREE.Mesh(geometry.clone(), collisionMaterial);
+        
+        collisionMesh.position.copy(mesh.position);
+        collisionMesh.rotation.copy(mesh.rotation);
+        collisionMesh.scale.copy(mesh.scale); // Just in case
+        scene.add(collisionMesh);
+        
+        collisionMeshes.push(collisionMesh); // Store for collision
+
+        /*
         // Create invisible collision box
         const collisionMaterial = new THREE.MeshBasicMaterial({ visible: false });
         const collisionMesh = new THREE.Mesh(geometry.clone(), collisionMaterial);
@@ -2005,7 +2016,7 @@ function createWallMesh(polygon) {
         
         collisionMeshes.push(collisionMesh);
         scene.add(collisionMesh);
-
+        */
         /*
         mesh.updateMatrixWorld(true); // Force-update transform
         mesh.geometry.computeBoundingBox(); // Ensure bounding box exists
@@ -2015,12 +2026,14 @@ function createWallMesh(polygon) {
         scene.add(helper);
         */
 
+        /*
         collisionMesh.updateMatrixWorld(true);
         collisionMesh.geometry.computeBoundingBox();
         const box = collisionMesh.geometry.boundingBox.clone();
         box.applyMatrix4(collisionMesh.matrixWorld);
         const helper = new THREE.Box3Helper(box, 0xffff00);
         scene.add(helper);
+        */
     }
 
     return group;
