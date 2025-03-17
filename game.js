@@ -83,6 +83,20 @@ function closeDialog() {
   document.getElementById('dialogBackdrop').style.display = 'none';
 }
 
+function downloadAction() {
+  const link = document.createElement('a');
+  link.href = 'https://drive.google.com/file/d/1xUPMof8Yq0ym_oRzZ1HxZjMDmoFwJAhv/view?usp=sharing';  // Replace with your file's URL
+  link.download = 'Asking.wav';  // Replace with desired filename
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+}
+
+function closeDialog() {
+  location.reload();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('threejs-scene');
     const scene = new THREE.Scene();
