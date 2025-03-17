@@ -5,6 +5,7 @@ let isWalking = false; // Tracks whether Stevey is currently walking
 let deltaTime = 0;
 let score = 0; // Default score
 let lastTime = performance.now();
+let invisibleCube; // Add this at the top of your script file
 
 window.onload = function() {
     let overlay = document.getElementById("black-overlay");
@@ -206,14 +207,14 @@ const collidableNames = [
 
     // Create an invisible cube
     const geometry = new THREE.BoxGeometry(2, 2, 2);
-    const material = new THREE.MeshBasicMaterial({ visible: false }); // Invisible material
-    const triggerCube = new THREE.Mesh(geometry, material);
+    const material = new THREE.MeshBasicMaterial({ visible: false });
+    invisibleCube = new THREE.Mesh(geometry, material);
     
-    // Set position (assuming y = 0)
-    triggerCube.position.set(48.84, 1, -26.56); // 1m above ground if your ground is at y=0
+    // Position at (48.84, 0, -26.56)
+    invisibleCube.position.set(48.84, 0, -26.56);
     
     // Add to scene
-    scene.add(geometry);
+    scene.add(invisibleCube);
     
     // Light
     const light = new THREE.DirectionalLight(0xffffff, 1.0);
