@@ -1942,10 +1942,10 @@ const detectWallCollision = (x, z) => {
     const point = new THREE.Vector3(x, 1.5, z);
 
     return wallMeshes.some(mesh => {
-        const box = new THREE.Box3().setFromObject(mesh);
+        const box = new THREE.Box3().setFromBufferAttribute(mesh.geometry.attributes.position);
+        box.applyMatrix4(mesh.matrixWorld); // Apply mesh's position & rotation
 
-        // Shrink box by small margin
-        box.expandByScalar(-0.1); // Shrinks in all directions by 0.1 units
+        box.expandByScalar(-0.05); // Optional: shrink slightly
 
         return box.containsPoint(point);
     });
