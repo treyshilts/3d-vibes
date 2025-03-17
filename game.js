@@ -2154,7 +2154,26 @@ gltf.animations.forEach((clip, index) => {
 //loadCadillac();
     
 const redSpheres = [];
+
+function createRedSphere(x, y, z) {
+    const sphereGeometry = new THREE.SphereGeometry(0.3, 16, 16);
     
+    // Light-emitting material (emissive light yellow)
+    const sphereMaterial = new THREE.MeshStandardMaterial({ 
+        color: 0xffffcc,          // Light yellow color
+        emissive: 0xffffcc,       // Emit light
+        emissiveIntensity: 1.5,   // Brightness of emission
+        roughness: 0.3,
+        metalness: 0.1
+    });
+
+    const redSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    redSphere.position.set(x, y, z);
+    scene.add(redSphere);
+    redSpheres.push(redSphere);
+}
+
+/*
 function createRedSphere(x, y, z) {
     const sphereGeometry = new THREE.SphereGeometry(0.3, 16, 16);
     const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 }); // Red color
@@ -2163,6 +2182,7 @@ function createRedSphere(x, y, z) {
     scene.add(redSphere);
     redSpheres.push(redSphere);
 }
+*/
 
 const sphereCoordinates = [
     { x: -2.73, y: 0.25, z: 7.97 },
