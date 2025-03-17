@@ -200,10 +200,6 @@ const collidableNames = [
         });
     };
     
-    wallPolygons.forEach(polygon => {
-        createWallMesh(polygon);
-    });
-    
     const collidables = [];
 
     // Light
@@ -1994,6 +1990,11 @@ const wallMaterial = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide
 });
 */
+
+wallPolygons.forEach(polygon => {
+    createWallMesh(polygon);
+});
+
 // Ray-casting algorithm to check if a point is inside a polygon
 function isPointInPolygon(point, polygon) {
     let inside = false;
