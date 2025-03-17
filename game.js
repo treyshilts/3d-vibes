@@ -73,6 +73,16 @@ const updateScore = (newScore) => {
     document.getElementById('score').textContent = score;
 };
 
+function showDialog() {
+  document.getElementById('collisionDialog').style.display = 'block';
+  document.getElementById('dialogBackdrop').style.display = 'block';
+}
+
+function closeDialog() {
+  document.getElementById('collisionDialog').style.display = 'none';
+  document.getElementById('dialogBackdrop').style.display = 'none';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('threejs-scene');
     const scene = new THREE.Scene();
