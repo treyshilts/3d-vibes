@@ -1935,29 +1935,36 @@ const detectWallCollision = (x, z) => {
     // TEMP ^^ // return wallPolygons.some(polygon => isPointInPolygon({ x, z }, polygon));
 };
 
-//for WALLDEBUGGING
 function createWallMesh(polygon) {
-    const shape = new THREE.Shape();
-    shape.moveTo(polygon[0].x, polygon[0].z);
-    for (let i = 1; i < polygon.length; i++) {
-        shape.lineTo(polygon[i].x, polygon[i].z);
+    const group = new THREE.Group(); // To group all wall segments for this polygon
+
+    const wallHeight = 3;
+    const wallThickness = 0.1; // Thin wall
+
+    for (let i = 0; i < polygon.length; i++) {
+        const start = polygon[i];
+        const end = polygon[(i + 1) % polygon.length]; // Wrap to first point
+
+        const dx = end.x - start.x;
+        const dz = end.z - start.z;
+        const length = Math.sqrt(dx * dx + dz * dz);
+
+        const geometry = new THREE.BoxGeometry(length, wallHeight, wallThickness);
+        const mesh = new THREE.Mesh(geometry, wallMaterial);
+
+        // Position at midpoint
+        const midX = (start.x + end.x) / 2;
+        const midZ = (start.z + end.z) / 2;
+        mesh.position.set(midX, wallHeight / 2, midZ); // Y = half height to sit on ground
+
+        // Rotate to align with edge direction
+        const angle = Math.atan2(dz, dx);
+        mesh.rotation.y = -angle;
+
+        group.add(mesh);
     }
-    shape.lineTo(polygon[0].x, polygon[0].z); // Close the shape
 
-    const extrudeSettings = {
-        steps: 1,
-        depth: 3, // Height of the wall
-        bevelEnabled: false
-    };
-
-    const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-    const mesh = new THREE.Mesh(geometry, wallMaterial);
-
-    // Rotate to XZ plane and lift above ground
-    mesh.rotation.x = -Math.PI / 2;
-    mesh.position.y = 0; // Adjust if needed
-
-    return mesh;
+    return group;
 }
 
 wallPolygons.forEach(polygon => {
