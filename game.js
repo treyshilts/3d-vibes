@@ -1938,8 +1938,8 @@ function isPointInPolygon(point, polygon) {
 
 // Updated detectWallCollision function
 const detectWallCollision = (x, z) => {
-    return false
-    // TEMP ^^ // return wallPolygons.some(polygon => isPointInPolygon({ x, z }, polygon));
+    //return false
+    return wallPolygons.some(polygon => isPointInPolygon({ x, z }, polygon));
 };
 
 function createWallMesh(polygon) {
