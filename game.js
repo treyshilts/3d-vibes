@@ -391,7 +391,7 @@ const flickerSpeeds = [
 ];
 
 // Firefly settings
-const numFireflies = 500; // Increase number for full-map effect
+const numFireflies = 1000; // Increase number for full-map effect
 const fireflySize = 0.05; // Slightly bigger for visibility
 const spawnRange = 150; // Fireflies will spawn within a 50-unit cube
 
