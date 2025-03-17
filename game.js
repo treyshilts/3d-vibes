@@ -2154,7 +2154,7 @@ gltf.animations.forEach((clip, index) => {
 //loadCadillac();
     
 const redSpheres = [];
-
+/*
 function createRedSphere(x, y, z) {
     const sphereGeometry = new THREE.SphereGeometry(0.3, 16, 16);
     
@@ -2173,16 +2173,15 @@ function createRedSphere(x, y, z) {
     redSpheres.push(redSphere);
 }
 
-/*
+*/
 function createRedSphere(x, y, z) {
     const sphereGeometry = new THREE.SphereGeometry(0.3, 16, 16);
-    const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xff0000 }); // Red color
+    const sphereMaterial = new THREE.MeshLambertMaterial({ color: 0xFFFFFF }); // Red color
     const redSphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
     redSphere.position.set(x, y, z); // Set the sphere's position
     scene.add(redSphere);
     redSpheres.push(redSphere);
 }
-*/
 
 const sphereCoordinates = [
     { x: -2.73, y: 0.25, z: 7.97 },
