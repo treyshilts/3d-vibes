@@ -1503,7 +1503,7 @@ const loadMap = () => {
 
 
     mapLoader.load(
-        'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_5.glb',
+        'https://treyshilts.github.io/3d-vibes/finalmap_summer3d_6.glb',
         (gltf) => {
             const map = gltf.scene;
 
