@@ -1837,7 +1837,8 @@ sphereCoordinates.forEach(coord => {
 // Define wall polygons (each wall is a set of { x, z } points)
 const wallPolygons = [
     [ // Wall 1
-        { x: 4.26, z: 5.90 },
+        { x: 4.26, z: 16.61 },
+        { x: 6.72, z: 11.30 },
         { x: 7.45, z: 3.97 },
         { x: 13.77, z: 1.07 },
         { x: 6.75, z: 30.12 },
