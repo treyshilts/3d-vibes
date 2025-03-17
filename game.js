@@ -85,7 +85,7 @@ function closeDialog() {
 
 function downloadAction() {
   const link = document.createElement('a');
-  link.href = 'https://drive.google.com/file/d/1xUPMof8Yq0ym_oRzZ1HxZjMDmoFwJAhv/view?usp=sharing';  // Replace with your file's URL
+  link.href = 'https://drive.google.com/drive/folders/1_f_kZ8U1TuclxaN9i3MkUuFH50_Qun13?usp=sharing';  // Replace with your file's URL
   link.download = 'Asking.wav';  // Replace with desired filename
   document.body.appendChild(link);
   link.click();
