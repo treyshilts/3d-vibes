@@ -204,6 +204,17 @@ const collidableNames = [
     
     const collidables = [];
 
+    // Create an invisible cube
+    const geometry = new THREE.BoxGeometry(2, 2, 2);
+    const material = new THREE.MeshBasicMaterial({ visible: false }); // Invisible material
+    const triggerCube = new THREE.Mesh(geometry, material);
+    
+    // Set position (assuming y = 0)
+    triggerCube.position.set(48.84, 1, -26.56); // 1m above ground if your ground is at y=0
+    
+    // Add to scene
+    scene.add(geometry);
+    
     // Light
     const light = new THREE.DirectionalLight(0xffffff, 1.0);
     light.position.set(5, 10, 5);
@@ -2201,6 +2212,15 @@ function checkCollisions() {
                 redSpheres.splice(i, 1); // Remove from array
                 updateScore(score + 1000); // Increase score
             }
+        }
+    }
+    
+    if (stevey && invisibleCube) {
+        const steveyBox = new THREE.Box3().setFromObject(stevey);
+        const cubeBox = new THREE.Box3().setFromObject(invisibleCube);
+
+        if (steveyBox.intersectsBox(cubeBox)) {
+            showDialog();
         }
     }
 }
