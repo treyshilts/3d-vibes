@@ -145,8 +145,7 @@ const collidableNames = [
     });
 
     const collisionMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffff00,
-        wireframe: true
+        visible: false
     });
     
     function createWallMesh(polygon) {
