@@ -1943,14 +1943,17 @@ function isPointInPolygon(point, polygon) {
 }
 
 const detectWallCollision = (x, z) => {
-    const point = new THREE.Vector3(x, 1.5, z); // Stevey's position
+    const point = new THREE.Vector3(x, 1.5, z);
 
     return collisionMeshes.some(mesh => {
-        mesh.updateMatrixWorld(true); // Force apply position + rotation
-        const box = new THREE.Box3().setFromObject(mesh);
+        mesh.geometry.computeBoundingBox(); // Ensure geometry box exists
+        const box = mesh.geometry.boundingBox.clone(); // Local space
+        mesh.updateMatrixWorld(true);
+        box.applyMatrix4(mesh.matrixWorld); // Transform to world space
         return box.containsPoint(point);
     });
 };
+
     
 // Updated detectWallCollision function
 /*const detectWallCollision = (x, z) => {
