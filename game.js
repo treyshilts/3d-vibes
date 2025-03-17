@@ -133,6 +133,8 @@ const collidableNames = [
   'trunk1',
 ];
 
+    const collisionMeshes = []; // Accurate hitboxes
+
     const collidables = [];
 
     // Light
@@ -1941,12 +1943,12 @@ function isPointInPolygon(point, polygon) {
 const detectWallCollision = (x, z) => {
     const point = new THREE.Vector3(x, 1.5, z);
 
-    return wallMeshes.some(mesh => {
-        mesh.updateMatrixWorld(true); // Force-update transform
-        mesh.geometry.computeBoundingBox(); // Ensure bounding box exists
+    return collisionMeshes.some(mesh => {
+        mesh.updateMatrixWorld(true);
+        mesh.geometry.computeBoundingBox();
         const box = mesh.geometry.boundingBox.clone();
-        box.applyMatrix4(mesh.matrixWorld); // Apply mesh position/rotation
-        box.expandByScalar(-0.05); // Optional shrink
+        box.applyMatrix4(mesh.matrixWorld);
+        box.expandByScalar(-0.05);
         return box.containsPoint(point);
     });
 };
@@ -1992,6 +1994,17 @@ function createWallMesh(polygon) {
         wallMeshes.push(mesh); // Store for collision
 
         scene.add(mesh); // Add mesh to scene first to finalize transforms
+
+        // Create invisible collision box
+        const collisionMaterial = new THREE.MeshBasicMaterial({ visible: false });
+        const collisionMesh = new THREE.Mesh(geometry.clone(), collisionMaterial);
+        
+        collisionMesh.position.copy(mesh.position);
+        collisionMesh.rotation.copy(mesh.rotation);
+        collisionMesh.updateMatrixWorld(true);
+        
+        collisionMeshes.push(collisionMesh);
+        scene.add(collisionMesh);
 
         mesh.updateMatrixWorld(true); // Force-update transform
         mesh.geometry.computeBoundingBox(); // Ensure bounding box exists
