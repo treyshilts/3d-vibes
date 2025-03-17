@@ -1942,12 +1942,8 @@ const detectWallCollision = (x, z) => {
     const point = new THREE.Vector3(x, 1.5, z);
 
     return wallMeshes.some(mesh => {
-        mesh.geometry.computeBoundingBox(); // Ensure bounding box exists
-        const box = mesh.geometry.boundingBox.clone();
-        box.applyMatrix4(mesh.matrixWorld); // Apply position/rotation
-
-        box.expandByScalar(-0.05); // Slightly shrink to avoid sticky collisions
-
+        const box = new THREE.Box3().setFromObject(mesh);
+        box.expandByScalar(-0.05);
         return box.containsPoint(point);
     });
 };
@@ -1992,7 +1988,10 @@ function createWallMesh(polygon) {
         group.add(mesh);
         wallMeshes.push(mesh); // Store for collision
 
-        const helper = new THREE.Box3Helper(new THREE.Box3().setFromObject(mesh), 0xffff00);
+        scene.add(mesh); // Add mesh to scene first to finalize transforms
+
+        const box = new THREE.Box3().setFromObject(mesh);
+        const helper = new THREE.Box3Helper(box, 0xffff00);
         scene.add(helper);
     }
 
