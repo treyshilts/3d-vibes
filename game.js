@@ -1938,8 +1938,24 @@ function isPointInPolygon(point, polygon) {
     return inside;
 }
 
-// Updated detectWallCollision function
 const detectWallCollision = (x, z) => {
+    const steveyPos = new THREE.Vector2(x, z);
+
+    return wallMeshes.some(mesh => {
+        const wallPos = new THREE.Vector2(mesh.position.x, mesh.position.z);
+        const distance = steveyPos.distanceTo(wallPos);
+        const wallLength = mesh.geometry.parameters.width;
+        const wallThickness = mesh.geometry.parameters.depth;
+
+        const buffer = 0.5; // Allow Stevey to get close before stopping
+        const hitZone = (wallLength / 2) + (wallThickness / 2) + buffer;
+
+        return distance < hitZone;
+    });
+};
+    
+// Updated detectWallCollision function
+/*const detectWallCollision = (x, z) => {
     const point = new THREE.Vector3(x, 1.5, z); // Assume Stevey’s height ~1.5
 
     return wallMeshes.some(mesh => {
@@ -1947,6 +1963,7 @@ const detectWallCollision = (x, z) => {
         return box.containsPoint(point);
     });
 };
+*/
 
 function createWallMesh(polygon) {
     const group = new THREE.Group(); // To group all wall segments for this polygon
