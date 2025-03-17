@@ -1552,7 +1552,13 @@ const smallerTreePositions = [
 },
 {
     "x": -37.22, "z": 47.96
-}
+},
+    {
+    "x": -20.25, "z": -12.62
+},
+{
+    "x": -29.05, "z": -27.78
+},
 ];
 const largestTreePositions = [
     {
