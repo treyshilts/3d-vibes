@@ -107,11 +107,13 @@ canvas.style.imageRendering = 'pixelated';
 canvas.style.imageRendering = '-moz-crisp-edges'; // Firefox
 canvas.style.imageRendering = 'crisp-edges'; // Other browsers
 
-// for WALLDEBUGGING
+// for WALLDEBUGGING (moving to end)
+/*
 wallPolygons.forEach(polygon => {
     const wallMesh = createWallMesh(polygon);
     scene.add(wallMesh);
 });
+*/
 
 // collision w/ objects in glb
 const collidableNames = [
@@ -1957,7 +1959,11 @@ function createWallMesh(polygon) {
     return mesh;
 }
 
-    
+wallPolygons.forEach(polygon => {
+    const wallMesh = createWallMesh(polygon);
+    scene.add(wallMesh);
+});
+
 /*
     const detectWallCollision = (x, z) => {
       return walls.some(wall => {
