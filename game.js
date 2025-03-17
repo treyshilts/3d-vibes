@@ -138,10 +138,13 @@ const collidableNames = [
     const collisionMeshes = []; // Accurate hitboxes
 
     const wallMaterial = new THREE.MeshBasicMaterial({
+        visible: false
+        /*
         color: 0xff0000,
         transparent: true,
         opacity: 0.5,
         side: THREE.DoubleSide
+        */
     });
 
     const collisionMaterial = new THREE.MeshBasicMaterial({
