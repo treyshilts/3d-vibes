@@ -1939,18 +1939,15 @@ function isPointInPolygon(point, polygon) {
 }
 
 const detectWallCollision = (x, z) => {
-    const steveyPos = new THREE.Vector2(x, z);
+    const point = new THREE.Vector3(x, 1.5, z);
 
     return wallMeshes.some(mesh => {
-        const wallPos = new THREE.Vector2(mesh.position.x, mesh.position.z);
-        const distance = steveyPos.distanceTo(wallPos);
-        const wallLength = mesh.geometry.parameters.width;
-        const wallThickness = mesh.geometry.parameters.depth;
+        const box = new THREE.Box3().setFromObject(mesh);
 
-        const buffer = 0.5; // Allow Stevey to get close before stopping
-        const hitZone = (wallLength / 2) + (wallThickness / 2) + buffer;
+        // Shrink box by small margin
+        box.expandByScalar(-0.1); // Shrinks in all directions by 0.1 units
 
-        return distance < hitZone;
+        return box.containsPoint(point);
     });
 };
     
