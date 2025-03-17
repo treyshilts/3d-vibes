@@ -107,6 +107,8 @@ canvas.style.imageRendering = 'pixelated';
 canvas.style.imageRendering = '-moz-crisp-edges'; // Firefox
 canvas.style.imageRendering = 'crisp-edges'; // Other browsers
 
+const wallMeshes = []; // Store all wall segment meshes here
+
 // for WALLDEBUGGING (moving to end)
 /*
 wallPolygons.forEach(polygon => {
@@ -1969,6 +1971,7 @@ function createWallMesh(polygon) {
         mesh.rotation.y = -angle;
 
         group.add(mesh);
+        wallMeshes.push(mesh); // Store for collision
     }
 
     return group;
