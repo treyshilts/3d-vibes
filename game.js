@@ -2027,8 +2027,7 @@ function createWallMesh(polygon) {
 }
 
 wallPolygons.forEach(polygon => {
-    const wallMesh = createWallMesh(polygon);
-    scene.add(wallMesh);
+    createWallMesh(polygon); // ✅ Just call it, don’t add returned group
 });
 
 /*
